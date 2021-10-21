@@ -1,33 +1,52 @@
 // Dependencies
-import React from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import React, { useContext } from 'react';
+import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
+
+// Context
+import AuthProvider, { AuthContext } from '../context/auth';
 
 // Components
 import Login from '../components/login/Login';
 import Dashboard from '../components/dashboard/Dashboard';
 import NotFound from '../components/notfound';
-import Register from '../components/register';
-import Contacts from '../components/contacts/Contacts';
+
+const PrivateRoute = ({ children, ...rest }) => {
+    const { isAuthenticated } = useContext(AuthContext);
+
+    return (
+        <Route
+            {...rest}
+            render={({ location }) =>
+                isAuthenticated ? (
+                    children
+                ) : (
+                    <Redirect
+                        to={{
+                            pathname: '/login',
+                            state: { from: location },
+                        }}
+                    />
+                )
+            }
+        />
+    );
+};
 
 const AppRoutes = () => {
     return (
-        <Router>
-            <Switch>
-                <Route exact path="/login">
-                    <Login />
-                </Route>
-                <Route exact path="/">
-                    <Dashboard />
-                </Route>
-                <Route exact path="/register">
-                    <Register />
-                </Route>
-                <Route exact path="/contacts">
-                    <Contacts />
-                </Route>
-                <Route component={NotFound} />
-            </Switch>
-        </Router>
+        <AuthProvider>
+            <Router>
+                <Switch>
+                    <PrivateRoute exact={true} path="/">
+                        <Dashboard />
+                    </PrivateRoute>
+                    <Route path="/login">
+                        <Login />
+                    </Route>
+                    <Route component={NotFound} />
+                </Switch>
+            </Router>
+        </AuthProvider>
     );
 };
 

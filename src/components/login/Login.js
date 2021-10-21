@@ -1,13 +1,13 @@
 // Dependencies
-import React, { useContext } from 'react';
-import { Redirect } from 'react-router';
+import React, { useContext, useEffect } from 'react';
+import { Redirect, useHistory, useLocation } from 'react-router-dom';
 import { Form, Input, Button, Typography, notification } from 'antd';
 
 // Components
 import { UserOutlined, LockOutlined, CheckCircleTwoTone } from '@ant-design/icons';
 
 // Context
-// import { AuthContext } from '../context/auth';
+import { AuthContext } from '../../context/auth';
 
 // Fetch Config
 import { post } from '../../config/api';
@@ -20,10 +20,12 @@ const { Password } = Input;
 const { Title } = Typography;
 
 const Login = () => {
-    // const { authenticate, isAuthenticated } = useContext(AuthContext);
+    const { authenticate, isAuthenticated } = useContext(AuthContext);
+    const history = useHistory();
+    const location = useLocation();
 
-    // if (isAuthenticated) return <Redirect to={{ pathname: '/' }} />;
-    // let { from } = location.state || { from: { pathname: '/' } };
+    if (isAuthenticated) return <Redirect to={{ pathname: '/' }} />;
+    let { from } = location.state || { from: { pathname: '/' } };
 
     const formSuccess = (data) => {
         post('/users/login', data)
@@ -38,9 +40,9 @@ const Login = () => {
                         token: response.data.token,
                         ...response.data.user,
                     };
-                    // authenticate(dataUser, () => {
-                    //     history.replace(from);
-                    // });
+                    authenticate(dataUser, () => {
+                        history.replace(from);
+                    });
                     console.log(dataUser);
                 }
             })
