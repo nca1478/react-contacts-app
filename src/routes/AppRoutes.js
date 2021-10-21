@@ -4,10 +4,10 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 // Components
 import Login from '../components/login';
-import Dashboard from '../components/dashboard';
+import Dashboard from '../components/dashboard/Dashboard';
 import NotFound from '../components/notfound';
 import Register from '../components/register';
-import Contacts from '../components/contacts';
+import Contacts from '../components/contacts/Contacts';
 
 const AppRoutes = () => {
     return (
