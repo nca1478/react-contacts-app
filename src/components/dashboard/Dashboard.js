@@ -7,20 +7,13 @@ import Contacts from '../contacts/Contacts';
 import Home from '../home/Home';
 
 // Context
-// import { AuthContext } from '../context/auth';
-
-// Styles
-// import '../App.css';
+import { AuthContext } from '../../context/auth';
 
 const { Header, Content, Footer } = Layout;
 
 const Dashboard = () => {
     const [menuItem, setMenuItem] = useState('1');
-    // const { signout } = useContext(AuthContext);
-
-    const signout = () => {
-        alert('Signout!!!');
-    };
+    const { signout } = useContext(AuthContext);
 
     return (
         <div className="App">
