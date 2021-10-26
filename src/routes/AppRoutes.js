@@ -7,7 +7,7 @@ import { AuthContext } from '../context/auth';
 
 // Components
 import Dashboard from '../components/dashboard/Dashboard';
-import NotFound from '../components/notfound';
+import NotFound from '../components/notfound/NotFound';
 
 // Routes
 import { PrivateRoute } from './PrivateRoute';
