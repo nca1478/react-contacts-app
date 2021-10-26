@@ -14,11 +14,11 @@ import { AuthContext } from '../../context/auth';
 const { Header, Content, Footer } = Layout;
 
 const handleLogoutFailure = (error) => {
-    console.log('Error Google Logout!!!', error);
+    console.log('Error: Google Logout!', error);
 };
 
 const handleLogoutSuccess = () => {
-    console.log('Logout!');
+    console.log('Bye, see you later!');
 };
 
 const Dashboard = () => {

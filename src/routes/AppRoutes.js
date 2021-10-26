@@ -1,5 +1,5 @@
 // Dependencies
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 // Context
@@ -15,7 +15,13 @@ import { PublicRoute } from './PublicRoute';
 import { AuthRouter } from './AuthRouter';
 
 const AppRoutes = () => {
-    const { isAuthenticated } = useContext(AuthContext);
+    const { rehydrate, isAuthenticated } = useContext(AuthContext);
+
+    useEffect(() => {
+        if (isAuthenticated) {
+            rehydrate();
+        }
+    }, []);
 
     return (
         <Router>
