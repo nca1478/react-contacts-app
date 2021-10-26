@@ -61,7 +61,32 @@ const Login = () => {
     };
 
     const responseGoogle = (response) => {
-        console.log(response.tokenId);
+        const tokenId = { tokenId: response.tokenId };
+        // console.log(response.tokenId);
+        post('/users/google', tokenId)
+            .then((response) => {
+                if (response.data === null) {
+                    notification['error']({
+                        message: 'Login Error',
+                        description: 'Please verify the data entered and try again.',
+                    });
+                } else {
+                    const dataUser = {
+                        token: response.data.token,
+                        ...response.data.user,
+                    };
+                    authenticate(dataUser, () => {
+                        history.replace(from);
+                    });
+                }
+            })
+            .catch((error) => {
+                notification['error']({
+                    message: 'Login Error',
+                    description: 'Please verify the data entered and try again.',
+                });
+                console.log(error);
+            });
     };
 
     return (
@@ -123,7 +148,7 @@ const Login = () => {
 
                     {/* Google Login Button */}
                     <GoogleLogin
-                        clientId="699491018053-v393sj87mepl0tbtldofnl87n94p1jlu.apps.googleusercontent.com"
+                        clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}
                         render={(renderProps) => (
                             <Button
                                 type="primary"

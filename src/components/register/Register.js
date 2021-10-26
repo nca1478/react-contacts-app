@@ -36,11 +36,11 @@ const Register = () => {
                         description: 'Please verify the data entered and try again.',
                     });
                 } else {
-                    // const dataUser = {
-                    //     token: response.data.token,
-                    //     ...response.data.user,
-                    // };
-                    authenticate(response.data, () => {
+                    const dataUser = {
+                        token: response.data.token,
+                        ...response.data.user,
+                    };
+                    authenticate(dataUser, () => {
                         history.replace(from);
                     });
                 }
