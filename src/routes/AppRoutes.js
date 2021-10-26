@@ -1,52 +1,39 @@
 // Dependencies
 import React, { useContext } from 'react';
-import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 // Context
-import AuthProvider, { AuthContext } from '../context/auth';
+import { AuthContext } from '../context/auth';
 
 // Components
-import Login from '../components/login/Login';
 import Dashboard from '../components/dashboard/Dashboard';
 import NotFound from '../components/notfound';
 
-const PrivateRoute = ({ children, ...rest }) => {
+// Routes
+import { PrivateRoute } from './PrivateRoute';
+import { PublicRoute } from './PublicRoute';
+import { AuthRouter } from './AuthRouter';
+
+const AppRoutes = () => {
     const { isAuthenticated } = useContext(AuthContext);
 
     return (
-        <Route
-            {...rest}
-            render={({ location }) =>
-                isAuthenticated ? (
-                    children
-                ) : (
-                    <Redirect
-                        to={{
-                            pathname: '/login',
-                            state: { from: location },
-                        }}
-                    />
-                )
-            }
-        />
-    );
-};
-
-const AppRoutes = () => {
-    return (
-        <AuthProvider>
-            <Router>
-                <Switch>
-                    <PrivateRoute exact={true} path="/">
-                        <Dashboard />
-                    </PrivateRoute>
-                    <Route path="/login">
-                        <Login />
-                    </Route>
-                    <Route component={NotFound} />
-                </Switch>
-            </Router>
-        </AuthProvider>
+        <Router>
+            <Switch>
+                <PrivateRoute
+                    exact={true}
+                    path="/"
+                    component={Dashboard}
+                    isAuthenticated={isAuthenticated}
+                />
+                <PublicRoute
+                    path="/auth"
+                    component={AuthRouter}
+                    isAuthenticated={isAuthenticated}
+                />
+                <Route path="*" component={NotFound} />
+            </Switch>
+        </Router>
     );
 };
 

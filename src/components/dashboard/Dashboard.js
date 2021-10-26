@@ -1,6 +1,6 @@
 // Dependencies
 import React, { useState, useContext } from 'react';
-import { Layout, Menu, Breadcrumb } from 'antd';
+import { Layout, Menu } from 'antd';
 
 // Components
 import Contacts from '../contacts/Contacts';

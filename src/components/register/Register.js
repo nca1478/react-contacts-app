@@ -4,7 +4,7 @@ import { Redirect, useHistory, useLocation, Link } from 'react-router-dom';
 import { Form, Input, Button, Typography, notification } from 'antd';
 
 // Components
-import { UserOutlined, LockOutlined, CheckCircleTwoTone } from '@ant-design/icons';
+import { UserOutlined, LockOutlined, CheckCircleTwoTone, MailOutlined } from '@ant-design/icons';
 
 // Context
 import { AuthContext } from '../../context/auth';
@@ -13,13 +13,13 @@ import { AuthContext } from '../../context/auth';
 import { post } from '../../config/api';
 
 // Styles
-import './Login.css';
+import './Register.css';
 
 const { Item } = Form;
 const { Password } = Input;
 const { Title } = Typography;
 
-const Login = () => {
+const Register = () => {
     const { authenticate, isAuthenticated } = useContext(AuthContext);
     const history = useHistory();
     const location = useLocation();
@@ -28,7 +28,7 @@ const Login = () => {
     let { from } = location.state || { from: { pathname: '/' } };
 
     const formSuccess = (data) => {
-        post('/users/login', data)
+        post('/users', data)
             .then((response) => {
                 if (response.data === null) {
                     notification['error']({
@@ -36,11 +36,11 @@ const Login = () => {
                         description: 'Please verify the data entered and try again.',
                     });
                 } else {
-                    const dataUser = {
-                        token: response.data.token,
-                        ...response.data.user,
-                    };
-                    authenticate(dataUser, () => {
+                    // const dataUser = {
+                    //     token: response.data.token,
+                    //     ...response.data.user,
+                    // };
+                    authenticate(response.data, () => {
                         history.replace(from);
                     });
                 }
@@ -65,22 +65,38 @@ const Login = () => {
                     style={{ fontSize: '70px', color: 'blue', marginBottom: '10px' }}
                 />
                 <Title level={3} className="login-title">
-                    Contacts App
+                    Register
                 </Title>
 
                 <Form name="formulario" onFinish={formSuccess} onFinishFailed={formFailed}>
                     <Item
-                        name="email"
+                        name="name"
                         rules={[
                             {
                                 required: true,
-                                message: 'Please enter your username',
+                                message: 'Please enter your fullname',
                             },
                         ]}
                     >
                         <Input
                             prefix={<UserOutlined className="site-form-item-icon" />}
-                            placeholder="Username"
+                            placeholder="Fullname..."
+                            size="large"
+                        />
+                    </Item>
+
+                    <Item
+                        name="email"
+                        rules={[
+                            {
+                                required: true,
+                                message: 'Please enter your email',
+                            },
+                        ]}
+                    >
+                        <Input
+                            prefix={<MailOutlined className="site-form-item-icon" />}
+                            placeholder="Email..."
                             size="large"
                         />
                     </Item>
@@ -90,7 +106,7 @@ const Login = () => {
                         rules={[
                             {
                                 required: true,
-                                message: 'Please enter your password',
+                                message: 'Por favor ingresar la contraseña',
                             },
                         ]}
                     >
@@ -108,13 +124,13 @@ const Login = () => {
                             className="login-form-button"
                             size="large"
                         >
-                            Login
+                            Register
                         </Button>
                     </Item>
 
                     <Item style={{ textAlign: 'center' }}>
-                        <span style={{ marginRight: '8px' }}>Do you need an account?</span>
-                        <Link to="/auth/register">Register</Link>
+                        <span style={{ marginRight: '8px' }}>Do you already have an account?</span>
+                        <Link to="/auth/login">Login</Link>
                     </Item>
                 </Form>
             </div>
@@ -122,4 +138,4 @@ const Login = () => {
     );
 };
 
-export default Login;
+export default Register;
