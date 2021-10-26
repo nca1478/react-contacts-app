@@ -1,10 +1,11 @@
 // Dependencies
 import React, { useContext } from 'react';
 import { Redirect, useHistory, useLocation, Link } from 'react-router-dom';
-import { Form, Input, Button, Typography, notification } from 'antd';
+import { Form, Input, Button, Typography, notification, Divider } from 'antd';
+import GoogleLogin from 'react-google-login';
 
 // Components
-import { UserOutlined, LockOutlined, CheckCircleTwoTone } from '@ant-design/icons';
+import { UserOutlined, LockOutlined, CheckCircleTwoTone, GoogleOutlined } from '@ant-design/icons';
 
 // Context
 import { AuthContext } from '../../context/auth';
@@ -14,6 +15,7 @@ import { post } from '../../config/api';
 
 // Styles
 import './Login.css';
+const dividerFontSize = { fontSize: '1rem' };
 
 const { Item } = Form;
 const { Password } = Input;
@@ -56,6 +58,10 @@ const Login = () => {
 
     const formFailed = (error) => {
         console.log('Error: ', error);
+    };
+
+    const responseGoogle = (response) => {
+        console.log(response.tokenId);
     };
 
     return (
@@ -101,6 +107,7 @@ const Login = () => {
                         />
                     </Item>
 
+                    {/* Local Login Button */}
                     <Item>
                         <Button
                             type="primary"
@@ -111,6 +118,30 @@ const Login = () => {
                             Login
                         </Button>
                     </Item>
+
+                    <Divider style={dividerFontSize}>Or</Divider>
+
+                    {/* Google Login Button */}
+                    <GoogleLogin
+                        clientId="699491018053-v393sj87mepl0tbtldofnl87n94p1jlu.apps.googleusercontent.com"
+                        render={(renderProps) => (
+                            <Button
+                                type="primary"
+                                htmlType="submit"
+                                className="login-form-button"
+                                size="large"
+                                onClick={renderProps.onClick}
+                                disabled={renderProps.disabled}
+                                danger
+                            >
+                                <GoogleOutlined /> Login with Google
+                            </Button>
+                        )}
+                        buttonText="Login"
+                        onSuccess={responseGoogle}
+                        onFailure={responseGoogle}
+                        cookiePolicy={'single_host_origin'}
+                    />
 
                     <Item style={{ textAlign: 'center' }}>
                         <span style={{ marginRight: '8px' }}>Do you need an account?</span>
