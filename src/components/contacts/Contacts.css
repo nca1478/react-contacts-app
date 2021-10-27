@@ -1,0 +1,14 @@
+.button-add {
+    position: fixed;
+    right: 5%;
+    bottom: 10%;
+    font-size: 30px !important;
+    height: 60px !important;
+    width: 60px !important;
+    border: none;
+}
+
+.ant-btn-icon-only.ant-btn-lg {
+    height: 60px !important;
+    width: 60px !important;
+}

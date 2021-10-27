@@ -1,6 +1,12 @@
 const baseUrl = 'http://localhost:4000/api/v1';
 
-const get = (pathUrl) => fetch(`${baseUrl}${pathUrl}`).then((res) => res.json());
+const get = (pathUrl, token) =>
+    fetch(`${baseUrl}${pathUrl}`, {
+        method: 'GET',
+        headers: {
+            Authorization: `jwt ${token}`,
+        },
+    }).then((res) => res.json());
 
 const post = (pathUrl, data) =>
     fetch(`${baseUrl}${pathUrl}`, {

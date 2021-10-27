@@ -4,7 +4,7 @@ import { Redirect, useHistory, useLocation, Link } from 'react-router-dom';
 import { Form, Input, Button, Typography, notification, Divider } from 'antd';
 import GoogleLogin from 'react-google-login';
 
-// Components
+// Icons
 import { UserOutlined, LockOutlined, CheckCircleTwoTone, GoogleOutlined } from '@ant-design/icons';
 
 // Context
