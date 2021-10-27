@@ -12,3 +12,11 @@
     height: 60px !important;
     width: 60px !important;
 }
+
+.input-form {
+    margin-bottom: 10px !important;
+}
+
+.button-form {
+    width: 100%;
+}

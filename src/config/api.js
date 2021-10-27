@@ -8,11 +8,12 @@ const get = (pathUrl, token) =>
         },
     }).then((res) => res.json());
 
-const post = (pathUrl, data) =>
+const post = (pathUrl, data, token) =>
     fetch(`${baseUrl}${pathUrl}`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
+            Authorization: `jwt ${token}`,
         },
         body: JSON.stringify(data),
     }).then((res) => res.json());

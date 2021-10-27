@@ -6,10 +6,13 @@ import { Divider, Button, Table, Space, notification } from 'antd';
 import { PlusOutlined, FormOutlined } from '@ant-design/icons';
 
 // Api
-import { get } from '../../config/api';
+import { get, post } from '../../config/api';
 
 // Context
 import { AuthContext } from '../../context/auth';
+
+// Components
+import ContactForm from './modals/ContactForm';
 
 // Styles
 import './Contacts.css';
@@ -19,6 +22,7 @@ const Contacts = () => {
     const { user } = useContext(AuthContext);
     const [contacts, setContacts] = useState([]);
     const [loading, setLoading] = useState(false);
+    const [isModalVisible, setIsModalVisible] = useState(false);
 
     useEffect(() => {
         fetchContacts();
@@ -91,6 +95,49 @@ const Contacts = () => {
         alert('Click!!!');
     };
 
+    const handleAddClick = () => {
+        setIsModalVisible(true);
+    };
+
+    const onCreate = async (data) => {
+        const { auth } = user;
+        const dataContact = {
+            name: data.fullname,
+            phone1: data.phone1,
+            celphone1: data.celphone1,
+            address: data.address,
+            email: data.email,
+        };
+
+        await post('/contacts', dataContact, auth.user.token)
+            .then((response) => {
+                if (response.data === null) {
+                    notification['error']({
+                        message: 'Error',
+                        description: 'Please verify the data entered and try again.',
+                    });
+                } else {
+                    notification['success']({
+                        message: 'Success Operation',
+                        description: 'Contact successfully created.',
+                    });
+                    fetchContacts();
+                    setIsModalVisible(false);
+                }
+            })
+            .catch((error) => {
+                notification['error']({
+                    message: 'Error',
+                    description: 'Please verify the data entered and try again.',
+                });
+                console.log(error);
+            });
+    };
+
+    const onCancel = () => {
+        setIsModalVisible(false);
+    };
+
     return (
         <div>
             <Divider style={dividerFontSize}>Contacts</Divider>
@@ -103,13 +150,15 @@ const Contacts = () => {
                 pagination={{ position: ['none', 'bottomLeft'] }}
             />
 
+            <ContactForm isModalVisible={isModalVisible} onCreate={onCreate} onCancel={onCancel} />
+
             <div className="button-add">
                 <Button
                     type="primary"
                     shape="circle"
                     icon={<PlusOutlined />}
                     size="large"
-                    onClick={handleClick}
+                    onClick={handleAddClick}
                 />
             </div>
         </div>
