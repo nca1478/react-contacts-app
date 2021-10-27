@@ -2,12 +2,12 @@
 import React, { useState } from 'react';
 
 // Utils
-import { getItem, setItem, removeItem } from '../config/localStorage';
+import { getItem, setItem, removeItem, keyLocalStorage } from '../config/localStorage';
 
 export const AuthContext = React.createContext();
 
 const isValidToken = () => {
-    const token = getItem('contacts_dashboard');
+    const token = getItem(keyLocalStorage);
     // JWT decode & check token validity & expiration.
     if (token) return true;
     return false;
@@ -18,7 +18,7 @@ const AuthProvider = (props) => {
     const [user, setUser] = useState({});
 
     function rehydrate() {
-        const dataUser = JSON.parse(getItem('contacts_dashboard'));
+        const dataUser = JSON.parse(getItem(keyLocalStorage));
         if (dataUser) {
             setUser({ ...user, auth: { user: dataUser } });
         }
@@ -27,13 +27,13 @@ const AuthProvider = (props) => {
     function authenticate(dataUser, cb) {
         setUser({ ...user, auth: { user: dataUser } });
         makeAuthenticated(true);
-        setItem('contacts_dashboard', JSON.stringify(dataUser));
+        setItem(keyLocalStorage, JSON.stringify(dataUser));
     }
 
     function signout(cb) {
         setUser({});
         makeAuthenticated(false);
-        removeItem('contacts_dashboard');
+        removeItem(keyLocalStorage);
     }
 
     return (

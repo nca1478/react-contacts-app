@@ -20,6 +20,6 @@ const getItem = (item) => localStorage.getItem(item);
  */
 const removeItem = (item) => localStorage.removeItem(item);
 
-const keyLocalStorage = 'GangaProfessional_dashboard';
+const keyLocalStorage = 'ContactsApp_dashboard';
 
 export { setItem, getItem, removeItem, keyLocalStorage };
