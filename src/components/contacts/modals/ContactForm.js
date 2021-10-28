@@ -1,6 +1,6 @@
 // Dependencies
 import React from 'react';
-import { Form, Input, Modal, Typography, Row, Col } from 'antd';
+import { Form, Input, Modal, Row, Col } from 'antd';
 
 // Antdesign
 const { Item } = Form;

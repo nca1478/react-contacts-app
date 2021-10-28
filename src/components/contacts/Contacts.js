@@ -6,13 +6,14 @@ import { Divider, Button, Table, Space, notification } from 'antd';
 import { PlusOutlined, FormOutlined } from '@ant-design/icons';
 
 // Api
-import { get, post } from '../../config/api';
+import { get, post, put } from '../../config/api';
 
 // Context
 import { AuthContext } from '../../context/auth';
 
-// Components
+// Modals
 import ContactForm from './modals/ContactForm';
+import ContactUpdateForm from './modals/ContactUpdateForm';
 
 // Styles
 import './Contacts.css';
@@ -22,40 +23,13 @@ const Contacts = () => {
     const { user } = useContext(AuthContext);
     const [contacts, setContacts] = useState([]);
     const [loading, setLoading] = useState(false);
-    const [isModalVisible, setIsModalVisible] = useState(false);
+    const [currentContact, setCurrentContact] = useState({});
+    const [isModalVisibleCF, setIsModalVisibleCF] = useState(false);
+    const [isModalVisibleCUF, setIsModalVisibleCUF] = useState(false);
 
     useEffect(() => {
         fetchContacts();
     }, []);
-
-    const fetchContacts = async () => {
-        const { auth } = user;
-        setLoading(true);
-        await get('/contacts', auth.user.token)
-            .then((response) => {
-                const data = parseTable(response.data);
-                setContacts(data);
-            })
-            .catch((error) => {
-                console.log(error);
-                notification['error']({
-                    message: 'An error has occurred',
-                    description: 'Error trying to get data from the database.',
-                });
-            });
-        setLoading(false);
-    };
-
-    const parseTable = (array) => {
-        const parsed = array.map((item) => {
-            return {
-                name: item.name,
-                celphone1: item.celphone1,
-                email: item.email,
-            };
-        });
-        return parsed;
-    };
 
     const columns = [
         {
@@ -82,7 +56,7 @@ const Contacts = () => {
                         <a>
                             <FormOutlined
                                 style={{ fontSize: 25 }}
-                                onClick={() => handleClick(record)}
+                                onClick={() => handleEditClick(record)}
                             />
                         </a>
                     </Space>
@@ -91,12 +65,21 @@ const Contacts = () => {
         },
     ];
 
-    const handleClick = () => {
-        alert('Click!!!');
-    };
-
-    const handleAddClick = () => {
-        setIsModalVisible(true);
+    const fetchContacts = async () => {
+        const { auth } = user;
+        setLoading(true);
+        await get('/contacts', auth.user.token)
+            .then((response) => {
+                setContacts(response.data);
+            })
+            .catch((error) => {
+                console.log(error);
+                notification['error']({
+                    message: 'An error has occurred',
+                    description: 'Error trying to get data from the database.',
+                });
+            });
+        setLoading(false);
     };
 
     const onCreate = async (data) => {
@@ -122,7 +105,7 @@ const Contacts = () => {
                         description: 'Contact successfully created.',
                     });
                     fetchContacts();
-                    setIsModalVisible(false);
+                    setIsModalVisibleCF(false);
                 }
             })
             .catch((error) => {
@@ -134,8 +117,58 @@ const Contacts = () => {
             });
     };
 
-    const onCancel = () => {
-        setIsModalVisible(false);
+    const onUpdate = async (data) => {
+        const { auth } = user;
+        const dataContact = {
+            id: data.id,
+            name: data.fullname,
+            phone1: data.phone1,
+            celphone1: data.celphone1,
+            address: data.address,
+            email: data.email,
+        };
+
+        await put(`/contacts/${dataContact.id}`, dataContact, auth.user.token)
+            .then((response) => {
+                if (response.data === null) {
+                    notification['error']({
+                        message: 'Error',
+                        description: 'Please verify the data entered and try again.',
+                    });
+                } else {
+                    notification['success']({
+                        message: 'Success Operation',
+                        description: 'Contact successfully updated.',
+                    });
+                    fetchContacts();
+                }
+            })
+            .catch((error) => {
+                notification['error']({
+                    message: 'Error',
+                    description: 'Please verify the data entered and try again.',
+                });
+                console.log(error);
+            });
+        setIsModalVisibleCUF(false);
+    };
+
+    const onCancelCF = () => {
+        setIsModalVisibleCF(false);
+    };
+
+    const onCancelCUF = () => {
+        setIsModalVisibleCUF(false);
+        setCurrentContact({});
+    };
+
+    const handleEditClick = (record) => {
+        setIsModalVisibleCUF(true);
+        setCurrentContact(record);
+    };
+
+    const handleAddClick = () => {
+        setIsModalVisibleCF(true);
     };
 
     return (
@@ -150,7 +183,18 @@ const Contacts = () => {
                 pagination={{ position: ['none', 'bottomLeft'] }}
             />
 
-            <ContactForm isModalVisible={isModalVisible} onCreate={onCreate} onCancel={onCancel} />
+            <ContactForm
+                isModalVisible={isModalVisibleCF}
+                onCreate={onCreate}
+                onCancel={onCancelCF}
+            />
+
+            <ContactUpdateForm
+                currentContact={currentContact}
+                isModalVisible={isModalVisibleCUF}
+                onUpdate={onUpdate}
+                onCancel={onCancelCUF}
+            />
 
             <div className="button-add">
                 <Button
