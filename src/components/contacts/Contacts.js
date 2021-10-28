@@ -1,12 +1,17 @@
 // Dependencies
 import React, { useContext, useEffect, useState } from 'react';
-import { Divider, Button, Table, Space, notification } from 'antd';
+import { Divider, Button, Table, Space, notification, Modal } from 'antd';
 
 // Icons
-import { PlusOutlined, FormOutlined } from '@ant-design/icons';
+import {
+    PlusOutlined,
+    FormOutlined,
+    DeleteTwoTone,
+    ExclamationCircleOutlined,
+} from '@ant-design/icons';
 
 // Api
-import { get, post, put } from '../../config/api';
+import { get, post, put, del } from '../../config/api';
 
 // Context
 import { AuthContext } from '../../context/auth';
@@ -19,8 +24,13 @@ import ContactUpdateForm from './modals/ContactUpdateForm';
 import './Contacts.css';
 const dividerFontSize = { fontSize: '1.3rem' };
 
+// Antdesing
+const { confirm } = Modal;
+
 const Contacts = () => {
-    const { user } = useContext(AuthContext);
+    const {
+        user: { auth },
+    } = useContext(AuthContext);
     const [contacts, setContacts] = useState([]);
     const [loading, setLoading] = useState(false);
     const [currentContact, setCurrentContact] = useState({});
@@ -59,6 +69,12 @@ const Contacts = () => {
                                 onClick={() => handleEditClick(record)}
                             />
                         </a>
+                        <a>
+                            <DeleteTwoTone
+                                style={{ fontSize: 25 }}
+                                onClick={() => handleDeleteClick({ id: record._id })}
+                            />
+                        </a>
                     </Space>
                 );
             },
@@ -66,7 +82,6 @@ const Contacts = () => {
     ];
 
     const fetchContacts = async () => {
-        const { auth } = user;
         setLoading(true);
         await get('/contacts', auth.user.token)
             .then((response) => {
@@ -83,7 +98,6 @@ const Contacts = () => {
     };
 
     const onCreate = async (data) => {
-        const { auth } = user;
         const dataContact = {
             name: data.fullname,
             phone1: data.phone1,
@@ -118,7 +132,6 @@ const Contacts = () => {
     };
 
     const onUpdate = async (data) => {
-        const { auth } = user;
         const dataContact = {
             id: data.id,
             name: data.fullname,
@@ -153,6 +166,45 @@ const Contacts = () => {
         setIsModalVisibleCUF(false);
     };
 
+    const onDelete = async (id) => {
+        await del(`/contacts/${id}`, auth.user.token)
+            .then((response) => {
+                if (response.data === null) {
+                    notification['error']({
+                        message: 'Error',
+                        description: 'Error deleting the register, Try again!',
+                    });
+                } else {
+                    notification['success']({
+                        message: 'Success Operation',
+                        description: 'Contact successfully deleted.',
+                    });
+                    fetchContacts();
+                }
+            })
+            .catch((error) => {
+                notification['error']({
+                    message: 'Error',
+                    description: 'Error deleting the register, Try again!',
+                });
+                console.log(error);
+            });
+    };
+
+    const showConfirm = (id) => {
+        confirm({
+            title: 'Warning',
+            icon: <ExclamationCircleOutlined />,
+            content: 'Do you Want to delete this contact?',
+            onOk() {
+                onDelete(id);
+            },
+            onCancel() {
+                console.log('Cancel Delete!');
+            },
+        });
+    };
+
     const onCancelCF = () => {
         setIsModalVisibleCF(false);
     };
@@ -169,6 +221,10 @@ const Contacts = () => {
 
     const handleAddClick = () => {
         setIsModalVisibleCF(true);
+    };
+
+    const handleDeleteClick = ({ id }) => {
+        showConfirm(id);
     };
 
     return (

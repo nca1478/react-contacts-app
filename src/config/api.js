@@ -26,6 +26,14 @@ const put = (pathUrl, data, token) =>
             Authorization: `jwt ${token}`,
         },
         body: JSON.stringify(data),
-    });
+    }).then((res) => res.json());
 
-export { get, post, put };
+const del = (pathUrl, token) =>
+    fetch(`${baseUrl}${pathUrl}`, {
+        method: 'DELETE',
+        headers: {
+            Authorization: `jwt ${token}`,
+        },
+    }).then((res) => res.json());
+
+export { get, post, put, del };
