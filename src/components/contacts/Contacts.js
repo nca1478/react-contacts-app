@@ -18,7 +18,6 @@ import { AuthContext } from '../../context/auth';
 
 // Modals
 import ContactForm from './modals/ContactForm';
-import ContactUpdateForm from './modals/ContactUpdateForm';
 
 // Styles
 import './Contacts.css';
@@ -34,8 +33,7 @@ const Contacts = () => {
     const [contacts, setContacts] = useState([]);
     const [loading, setLoading] = useState(false);
     const [currentContact, setCurrentContact] = useState({});
-    const [isModalVisibleCF, setIsModalVisibleCF] = useState(false);
-    const [isModalVisibleCUF, setIsModalVisibleCUF] = useState(false);
+    const [isModalVisible, setIsModalVisible] = useState(false);
 
     useEffect(() => {
         fetchContacts();
@@ -48,7 +46,7 @@ const Contacts = () => {
             key: 'name',
         },
         {
-            title: 'Celphone',
+            title: 'Cellphone',
             dataIndex: 'celphone1',
             key: 'celphone1',
         },
@@ -119,7 +117,6 @@ const Contacts = () => {
                         description: 'Contact successfully created.',
                     });
                     fetchContacts();
-                    setIsModalVisibleCF(false);
                 }
             })
             .catch((error) => {
@@ -129,6 +126,7 @@ const Contacts = () => {
                 });
                 console.log(error);
             });
+        setIsModalVisible(false);
     };
 
     const onUpdate = async (data) => {
@@ -163,7 +161,7 @@ const Contacts = () => {
                 });
                 console.log(error);
             });
-        setIsModalVisibleCUF(false);
+        setIsModalVisible(false);
     };
 
     const onDelete = async (id) => {
@@ -205,22 +203,18 @@ const Contacts = () => {
         });
     };
 
-    const onCancelCF = () => {
-        setIsModalVisibleCF(false);
-    };
-
-    const onCancelCUF = () => {
-        setIsModalVisibleCUF(false);
-        setCurrentContact({});
-    };
-
-    const handleEditClick = (record) => {
-        setIsModalVisibleCUF(true);
-        setCurrentContact(record);
+    const onCancel = () => {
+        setIsModalVisible(false);
     };
 
     const handleAddClick = () => {
-        setIsModalVisibleCF(true);
+        setIsModalVisible(true);
+        setCurrentContact(null);
+    };
+
+    const handleEditClick = (record) => {
+        setIsModalVisible(true);
+        setCurrentContact(record);
     };
 
     const handleDeleteClick = ({ id }) => {
@@ -240,16 +234,11 @@ const Contacts = () => {
             />
 
             <ContactForm
-                isModalVisible={isModalVisibleCF}
-                onCreate={onCreate}
-                onCancel={onCancelCF}
-            />
-
-            <ContactUpdateForm
                 currentContact={currentContact}
-                isModalVisible={isModalVisibleCUF}
+                isModalVisible={isModalVisible}
+                onCreate={onCreate}
                 onUpdate={onUpdate}
-                onCancel={onCancelCUF}
+                onCancel={onCancel}
             />
 
             <div className="button-add">
