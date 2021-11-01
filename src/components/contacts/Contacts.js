@@ -44,19 +44,22 @@ const Contacts = () => {
             title: 'Name',
             dataIndex: 'name',
             key: 'name',
+            responsive: ['md', 'sm', 'xs'],
         },
         {
             title: 'Cellphone',
             dataIndex: 'celphone1',
             key: 'celphone1',
+            responsive: ['md'],
         },
         {
             title: 'Email',
             dataIndex: 'email',
             key: 'email',
+            responsive: ['md'],
         },
         {
-            title: 'Acción',
+            title: 'Action',
             key: 'action',
             render: (record) => {
                 return (
@@ -76,6 +79,7 @@ const Contacts = () => {
                     </Space>
                 );
             },
+            responsive: ['md', 'sm', 'xs'],
         },
     ];
 
@@ -230,7 +234,7 @@ const Contacts = () => {
                 dataSource={contacts}
                 loading={loading}
                 rowKey="id"
-                pagination={{ position: ['none', 'bottomLeft'] }}
+                pagination={{ position: ['none', 'bottomLeft'], pageSize: 5 }}
             />
 
             <ContactForm
