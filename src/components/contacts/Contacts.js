@@ -34,8 +34,12 @@ const Contacts = () => {
     const [loading, setLoading] = useState(false);
     const [currentContact, setCurrentContact] = useState({});
     const [isModalVisible, setIsModalVisible] = useState(false);
+    const [totalPages, setTotalPages] = useState(1);
+    const [page, setPage] = useState(1);
+    const [pageSize, setPageSize] = useState(5);
 
     useEffect(() => {
+        fetchCountContacts();
         fetchContacts();
     }, []);
 
@@ -83,20 +87,37 @@ const Contacts = () => {
         },
     ];
 
-    const fetchContacts = async () => {
-        setLoading(true);
-        await get('/contacts', auth.user.token)
+    const fetchCountContacts = async () => {
+        await get('/contacts/count', auth.user.token)
             .then((response) => {
-                setContacts(response.data);
+                setTotalPages(response.data);
             })
             .catch((error) => {
                 console.log(error);
                 notification['error']({
                     message: 'An error has occurred',
-                    description: 'Error trying to get data from the database.',
+                    description: 'Error trying to count contacts from the database.',
                 });
             });
-        setLoading(false);
+    };
+
+    const fetchContacts = async (p = 1) => {
+        setLoading(true);
+        await get(`/contacts?page=${p}`, auth.user.token)
+            .then((response) => {
+                setContacts(response.data);
+                fetchCountContacts();
+            })
+            .catch((error) => {
+                console.log(error);
+                notification['error']({
+                    message: 'An error has occurred',
+                    description: 'Error trying to get contacts from the database.',
+                });
+            })
+            .finally(() => {
+                setLoading(false);
+            });
     };
 
     const onCreate = async (data) => {
@@ -113,24 +134,26 @@ const Contacts = () => {
                 if (response.data === null) {
                     notification['error']({
                         message: 'Error',
-                        description: 'Please verify the data entered and try again.',
+                        description: 'Error trying to creating contact into the database.',
                     });
                 } else {
                     notification['success']({
                         message: 'Success Operation',
                         description: 'Contact successfully created.',
                     });
-                    fetchContacts();
+                    fetchContacts(page);
                 }
             })
             .catch((error) => {
                 notification['error']({
                     message: 'Error',
-                    description: 'Please verify the data entered and try again.',
+                    description: 'Error trying to creating contact into the database.',
                 });
                 console.log(error);
+            })
+            .finally(() => {
+                setIsModalVisible(false);
             });
-        setIsModalVisible(false);
     };
 
     const onUpdate = async (data) => {
@@ -148,20 +171,20 @@ const Contacts = () => {
                 if (response.data === null) {
                     notification['error']({
                         message: 'Error',
-                        description: 'Please verify the data entered and try again.',
+                        description: 'Error trying to updating contact into the database.',
                     });
                 } else {
                     notification['success']({
                         message: 'Success Operation',
                         description: 'Contact successfully updated.',
                     });
-                    fetchContacts();
+                    fetchContacts(page);
                 }
             })
             .catch((error) => {
                 notification['error']({
                     message: 'Error',
-                    description: 'Please verify the data entered and try again.',
+                    description: 'Error trying to updating contact into the database.',
                 });
                 console.log(error);
             });
@@ -174,20 +197,20 @@ const Contacts = () => {
                 if (response.data === null) {
                     notification['error']({
                         message: 'Error',
-                        description: 'Error deleting the register, Try again!',
+                        description: 'Error trying to deleting contact into the database.',
                     });
                 } else {
                     notification['success']({
                         message: 'Success Operation',
                         description: 'Contact successfully deleted.',
                     });
-                    fetchContacts();
+                    fetchContacts(page);
                 }
             })
             .catch((error) => {
                 notification['error']({
                     message: 'Error',
-                    description: 'Error deleting the register, Try again!',
+                    description: 'Error trying to deleting contact into the database.',
                 });
                 console.log(error);
             });
@@ -197,7 +220,7 @@ const Contacts = () => {
         confirm({
             title: 'Warning',
             icon: <ExclamationCircleOutlined />,
-            content: 'Do you Want to delete this contact?',
+            content: 'Do you want to delete this contact?',
             onOk() {
                 onDelete(id);
             },
@@ -209,6 +232,7 @@ const Contacts = () => {
 
     const onCancel = () => {
         setIsModalVisible(false);
+        setCurrentContact(null);
     };
 
     const handleAddClick = () => {
@@ -234,7 +258,17 @@ const Contacts = () => {
                 dataSource={contacts}
                 loading={loading}
                 rowKey="id"
-                pagination={{ position: ['none', 'bottomLeft'], pageSize: 5 }}
+                pagination={{
+                    position: ['none', 'bottomLeft'],
+                    current: page,
+                    pageSize,
+                    total: totalPages,
+                    onChange: async (page, pageSize) => {
+                        setPage(page);
+                        setPageSize(pageSize);
+                        await fetchContacts(page);
+                    },
+                }}
             />
 
             <ContactForm
