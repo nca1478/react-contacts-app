@@ -30,3 +30,23 @@
 .google-button {
     text-align: center;
 }
+
+.facebook-button {
+    font-size: 1rem;
+    background-color: #4c69ba;
+    color: white;
+    border: none;
+    padding: 8px 20px;
+    margin-top: 10px;
+    border-radius: 2px;
+    cursor: pointer;
+}
+
+.facebook-button span {
+    margin-left: 10px;
+}
+
+.facebook-button:hover {
+    filter: brightness(110%);
+    transition: all 0.5s;
+}

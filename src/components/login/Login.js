@@ -3,6 +3,7 @@ import React, { useContext } from 'react';
 import { Redirect, useHistory, useLocation, Link } from 'react-router-dom';
 import { Form, Input, Button, Typography, notification, Divider } from 'antd';
 import GoogleLogin from 'react-google-login';
+import FacebookLogin from 'react-facebook-login';
 
 // Icons
 import { UserOutlined, LockOutlined, CheckCircleTwoTone, GoogleOutlined } from '@ant-design/icons';
@@ -68,7 +69,7 @@ const Login = () => {
                 if (response.data === null) {
                     notification['error']({
                         message: 'Login Error',
-                        description: 'Please verify the data entered and try again.',
+                        description: 'An error has occurred starting the google session.',
                     });
                 } else {
                     const dataUser = {
@@ -83,7 +84,36 @@ const Login = () => {
             .catch((error) => {
                 notification['error']({
                     message: 'Login Error',
-                    description: 'Please verify the data entered and try again.',
+                    description: 'An error has occurred starting the google session.',
+                });
+                console.log(error);
+            });
+    };
+
+    const responseFacebook = (response) => {
+        const facebookData = { accessToken: response.accessToken, userID: response.userID };
+        // console.log(response);
+        post('/users/facebook', facebookData)
+            .then((response) => {
+                if (response.data === null) {
+                    notification['error']({
+                        message: 'Login Error',
+                        description: 'An error has occurred starting the facebook session.',
+                    });
+                } else {
+                    const dataUser = {
+                        token: response.data.token,
+                        ...response.data.user,
+                    };
+                    authenticate(dataUser, () => {
+                        history.replace(from);
+                    });
+                }
+            })
+            .catch((error) => {
+                notification['error']({
+                    message: 'Login Error',
+                    description: 'An error has occurred starting the facebook session.',
                 });
                 console.log(error);
             });
@@ -166,6 +196,15 @@ const Login = () => {
                         onSuccess={responseGoogle}
                         onFailure={responseGoogle}
                         cookiePolicy={'single_host_origin'}
+                    />
+
+                    {/* Facebook Login Button */}
+                    <FacebookLogin
+                        appId={process.env.REACT_APP_FACEBOOK_APP_ID}
+                        callback={responseFacebook}
+                        cssClass="login-form-button facebook-button"
+                        textButton={<span>Login with Facebook</span>}
+                        icon="fa-facebook"
                     />
 
                     <Item style={{ textAlign: 'center' }}>
