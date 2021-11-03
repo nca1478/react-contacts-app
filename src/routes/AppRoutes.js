@@ -21,6 +21,7 @@ const AppRoutes = () => {
         if (isAuthenticated) {
             rehydrate();
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     return (

@@ -31,6 +31,7 @@ const ContactForm = ({ currentContact, isModalVisible, onCreate, onUpdate, onCan
         } else {
             form.setFieldsValue(initialFieldsValue);
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [currentContact]);
 
     const onOk = () => {
@@ -50,6 +51,7 @@ const ContactForm = ({ currentContact, isModalVisible, onCreate, onUpdate, onCan
 
     return (
         <Modal
+            forceRender
             title={currentContact ? 'Edit Contact' : 'Add New Contact'}
             visible={isModalVisible}
             okText="Save"

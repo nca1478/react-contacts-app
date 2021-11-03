@@ -26,6 +26,7 @@ const User = ({ userProfile }) => {
             email: userProfile.email,
             token: userProfile.token,
         });
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [userProfile]);
 
     const onUpdate = async (data) => {

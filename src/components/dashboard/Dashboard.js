@@ -11,9 +11,6 @@ import User from '../user/User';
 // Context
 import { AuthContext } from '../../context/auth';
 
-// Icons
-import { UserOutlined } from '@ant-design/icons';
-
 // Antdesign
 const { Header, Content, Footer } = Layout;
 const { SubMenu } = Menu;

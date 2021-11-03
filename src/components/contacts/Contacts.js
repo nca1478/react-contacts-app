@@ -1,6 +1,6 @@
 // Dependencies
 import React, { useContext, useEffect, useState } from 'react';
-import { Divider, Button, Table, Space, notification, Modal, Input } from 'antd';
+import { Button, Table, Space, notification, Modal, Input } from 'antd';
 
 // Icons
 import {
@@ -21,21 +21,11 @@ import ContactForm from './modals/ContactForm';
 
 // Styles
 import './Contacts.css';
-const dividerFontSize = { fontSize: '1.3rem' };
+// const dividerFontSize = { fontSize: '1.3rem' };
 
 // Antdesing
 const { confirm } = Modal;
 const { Search } = Input;
-
-// Form Setting
-const layoutForm = {
-    labelCol: {
-        span: 6,
-    },
-    wrapperCol: {
-        span: 24,
-    },
-};
 
 const Contacts = () => {
     const {
@@ -52,6 +42,7 @@ const Contacts = () => {
     useEffect(() => {
         fetchCountContacts();
         fetchContacts();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     const columns = [
@@ -79,13 +70,13 @@ const Contacts = () => {
             render: (record) => {
                 return (
                     <Space size="middle">
-                        <a>
+                        <a href="/#">
                             <FormOutlined
                                 style={{ fontSize: 25 }}
                                 onClick={() => handleEditClick(record)}
                             />
                         </a>
-                        <a>
+                        <a href="/#">
                             <DeleteTwoTone
                                 style={{ fontSize: 25 }}
                                 onClick={() => handleDeleteClick({ id: record._id })}
@@ -302,7 +293,7 @@ const Contacts = () => {
                 columns={columns}
                 dataSource={contacts}
                 loading={loading}
-                rowKey="id"
+                rowKey="_id"
                 pagination={{
                     position: ['none', 'bottomLeft'],
                     current: page,
