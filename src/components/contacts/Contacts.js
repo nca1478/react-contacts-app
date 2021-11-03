@@ -1,6 +1,6 @@
 // Dependencies
 import React, { useContext, useEffect, useState } from 'react';
-import { Divider, Button, Table, Space, notification, Modal } from 'antd';
+import { Divider, Button, Table, Space, notification, Modal, Input } from 'antd';
 
 // Icons
 import {
@@ -25,6 +25,17 @@ const dividerFontSize = { fontSize: '1.3rem' };
 
 // Antdesing
 const { confirm } = Modal;
+const { Search } = Input;
+
+// Form Setting
+const layoutForm = {
+    labelCol: {
+        span: 6,
+    },
+    wrapperCol: {
+        span: 24,
+    },
+};
 
 const Contacts = () => {
     const {
@@ -104,6 +115,25 @@ const Contacts = () => {
     const fetchContacts = async (p = 1) => {
         setLoading(true);
         await get(`/contacts?page=${p}`, auth.user.token)
+            .then((response) => {
+                setContacts(response.data);
+                fetchCountContacts();
+            })
+            .catch((error) => {
+                console.log(error);
+                notification['error']({
+                    message: 'An error has occurred',
+                    description: 'Error trying to get contacts from the database.',
+                });
+            })
+            .finally(() => {
+                setLoading(false);
+            });
+    };
+
+    const fetchContactsByName = async (name) => {
+        setLoading(true);
+        await post('/contacts/search', { name }, auth.user.token)
             .then((response) => {
                 setContacts(response.data);
                 fetchCountContacts();
@@ -249,9 +279,24 @@ const Contacts = () => {
         showConfirm(id);
     };
 
+    const onSearch = (value) => {
+        fetchContactsByName(value);
+    };
+
     return (
         <div>
-            <Divider style={dividerFontSize}>Contacts</Divider>
+            {/* <Divider style={dividerFontSize}>Contacts</Divider> */}
+            <div className="box-filtering">
+                <Search
+                    autoFocus
+                    placeholder="Input name text"
+                    allowClear
+                    enterButton="Search"
+                    size="large"
+                    onSearch={onSearch}
+                    style={{ width: '50%', marginBottom: '20px' }}
+                />
+            </div>
 
             <Table
                 columns={columns}
