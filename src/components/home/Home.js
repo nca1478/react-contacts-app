@@ -20,7 +20,7 @@ const Home = () => {
 
     return (
         <div>
-            <Divider style={dividerFontSize}>{loaded && auth.user.name} - Bienvenido</Divider>
+            <Divider style={dividerFontSize}>Bienvenido {loaded && auth.user.name}</Divider>
         </div>
     );
 };
