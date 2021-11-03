@@ -18,6 +18,7 @@ import { post } from '../../config/api';
 import './Login.css';
 const dividerFontSize = { fontSize: '1rem' };
 
+// Antdesign
 const { Item } = Form;
 const { Password } = Input;
 const { Title } = Typography;
@@ -120,7 +121,7 @@ const Login = () => {
     };
 
     return (
-        <div className="container">
+        <div className="container-login">
             <div className="form">
                 <CheckCircleTwoTone
                     style={{ fontSize: '70px', color: 'blue', marginBottom: '10px' }}
@@ -129,7 +130,7 @@ const Login = () => {
                     Contacts App
                 </Title>
 
-                <Form name="formulario" onFinish={formSuccess} onFinishFailed={formFailed}>
+                <Form name="login-form" onFinish={formSuccess} onFinishFailed={formFailed}>
                     <Item
                         name="email"
                         rules={[

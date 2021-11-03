@@ -1,4 +1,4 @@
-.container {
+.container-login {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -7,7 +7,7 @@
     background-color: #f1f1f1;
 }
 
-.container .form {
+.container-login .form {
     width: 400px;
     border: 1px solid #ddd;
     border-radius: 3px;

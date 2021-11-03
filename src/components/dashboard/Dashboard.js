@@ -6,6 +6,7 @@ import { Layout, Menu, Avatar } from 'antd';
 // Components
 import Contacts from '../contacts/Contacts';
 import Home from '../home/Home';
+import User from '../user/User';
 
 // Context
 import { AuthContext } from '../../context/auth';
@@ -47,7 +48,7 @@ const Dashboard = () => {
         // Google SignOut
         signOut();
 
-        // State App SignOut
+        // Local SignOut
         signout();
     };
 
@@ -74,23 +75,22 @@ const Dashboard = () => {
                                 )
                             }
                         >
+                            {loaded && !(auth.user.google || auth.user.facebook) ? (
+                                <Menu.Item onClick={() => setMenuItem('4')} key="4">
+                                    Profile
+                                </Menu.Item>
+                            ) : null}
+
                             <Menu.Item onClick={() => handleSignOut()} key="3">
                                 Logout
                             </Menu.Item>
                         </SubMenu>
-
-                        {/* <Menu.Item key="4">
-                            {loaded && auth.user.img ? (
-                                <Avatar size="large" src={auth.user.img} />
-                            ) : (
-                                <Avatar size={40}>USER</Avatar>
-                            )}
-                        </Menu.Item> */}
                     </Menu>
                 </Header>
                 <Content style={{ padding: '0 50px', minHeight: 'calc(100vh - 134px)' }}>
                     {menuItem === '1' && <Home />}
                     {menuItem === '2' && <Contacts />}
+                    {menuItem === '4' && <User userProfile={auth.user} />}
                 </Content>
                 <Footer style={{ textAlign: 'center' }}>
                     Copyright &copy; 2021 - React Contacts App
