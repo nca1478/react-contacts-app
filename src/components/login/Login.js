@@ -127,7 +127,7 @@ const Login = () => {
                     style={{ fontSize: '70px', color: 'blue', marginBottom: '10px' }}
                 />
                 <Title level={3} className="login-title">
-                    Contacts App
+                    React Contacts App
                 </Title>
 
                 <Form name="login-form" onFinish={formSuccess} onFinishFailed={formFailed}>

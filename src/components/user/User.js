@@ -113,7 +113,11 @@ const User = ({ userProfile }) => {
                         rules={[
                             {
                                 required: true,
-                                message: 'Please enter your username',
+                                message: 'Please enter your email',
+                            },
+                            {
+                                type: 'email',
+                                message: 'The input is not valid email!',
                             },
                         ]}
                     >
@@ -131,7 +135,13 @@ const User = ({ userProfile }) => {
                                 required: true,
                                 message: 'Please enter your password',
                             },
+                            {
+                                pattern:
+                                    /^(?=.*\d)(?=.*[a-zA-Z])[0-9a-zA-Z!"#$%&()=?¿*-_.:,;+^\\-`.+,/]{8,}$/,
+                                message: `Password must have 8 characters and 1 number`,
+                            },
                         ]}
+                        hasFeedback
                     >
                         <Password
                             prefix={<LockOutlined className="site-form-item-icon" />}

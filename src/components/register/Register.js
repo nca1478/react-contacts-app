@@ -65,7 +65,7 @@ const Register = () => {
                     style={{ fontSize: '70px', color: 'blue', marginBottom: '10px' }}
                 />
                 <Title level={3} className="login-title">
-                    Register
+                    Create an Account
                 </Title>
 
                 <Form name="formulario" onFinish={formSuccess} onFinishFailed={formFailed}>
@@ -89,12 +89,12 @@ const Register = () => {
                         name="email"
                         rules={[
                             {
-                                type: 'email',
-                                message: 'The input is not valid email!',
-                            },
-                            {
                                 required: true,
                                 message: 'Please enter your email',
+                            },
+                            {
+                                type: 'email',
+                                message: 'The input is not valid email!',
                             },
                         ]}
                     >
