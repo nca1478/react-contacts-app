@@ -89,6 +89,10 @@ const Register = () => {
                         name="email"
                         rules={[
                             {
+                                type: 'email',
+                                message: 'The input is not valid email!',
+                            },
+                            {
                                 required: true,
                                 message: 'Please enter your email',
                             },
@@ -106,13 +110,55 @@ const Register = () => {
                         rules={[
                             {
                                 required: true,
-                                message: 'Por favor ingresar la contraseña',
+                                message: 'Please enter your password',
                             },
+                            {
+                                pattern:
+                                    /^(?=.*\d)(?=.*[a-zA-Z])[0-9a-zA-Z!"#$%&()=?¿*-_.:,;+^\\-`.+,/]{8,}$/,
+                                message: `Password must have 8 characters and 1 number`,
+                            },
+                        ]}
+                        hasFeedback
+                    >
+                        <Password
+                            prefix={<LockOutlined className="site-form-item-icon" />}
+                            placeholder="Password..."
+                            size="large"
+                        />
+                    </Item>
+
+                    <Item
+                        name="confirm"
+                        dependencies={['password']}
+                        hasFeedback
+                        rules={[
+                            {
+                                required: true,
+                                message: 'Please confirm your password!',
+                            },
+                            {
+                                pattern:
+                                    /^(?=.*\d)(?=.*[a-zA-Z])[0-9a-zA-Z!"#$%&()=?¿*-_.:,;+^\\-`.+,/]{8,}$/,
+                                message: `Password must have 8 characters and 1 number`,
+                            },
+                            ({ getFieldValue }) => ({
+                                validator(_, value) {
+                                    if (!value || getFieldValue('password') === value) {
+                                        return Promise.resolve();
+                                    }
+
+                                    return Promise.reject(
+                                        new Error(
+                                            'The two passwords that you entered do not match!',
+                                        ),
+                                    );
+                                },
+                            }),
                         ]}
                     >
                         <Password
                             prefix={<LockOutlined className="site-form-item-icon" />}
-                            placeholder="Password"
+                            placeholder="Confirm Password..."
                             size="large"
                         />
                     </Item>
