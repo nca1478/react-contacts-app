@@ -31,7 +31,6 @@ const ContactForm = ({ currentContact, isModalVisible, onCreate, onUpdate, onCan
         } else {
             form.setFieldsValue(initialFieldsValue);
         }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [currentContact]);
 
     const onOk = () => {
@@ -51,7 +50,6 @@ const ContactForm = ({ currentContact, isModalVisible, onCreate, onUpdate, onCan
 
     return (
         <Modal
-            forceRender
             title={currentContact ? 'Edit Contact' : 'Add New Contact'}
             visible={isModalVisible}
             okText="Save"
@@ -88,7 +86,28 @@ const ContactForm = ({ currentContact, isModalVisible, onCreate, onUpdate, onCan
                             rules={[
                                 {
                                     required: true,
-                                    message: 'Please enter your celphone!',
+                                    message: 'Please enter your cellphone!',
+                                },
+                                {
+                                    pattern: /^[0-9]+$/,
+                                    message: `Please enter correct cellphone!`,
+                                },
+                            ]}
+                        >
+                            <Input />
+                        </Item>
+
+                        <Item
+                            name="email"
+                            label="Email"
+                            rules={[
+                                {
+                                    required: true,
+                                    message: 'Please enter your email',
+                                },
+                                {
+                                    type: 'email',
+                                    message: 'The input is not valid email!',
                                 },
                             ]}
                         >
@@ -108,11 +127,16 @@ const ContactForm = ({ currentContact, isModalVisible, onCreate, onUpdate, onCan
                             <Input />
                         </Item>
 
-                        <Item name="phone1" label="Phone">
-                            <Input />
-                        </Item>
-
-                        <Item name="email" label="Email">
+                        <Item
+                            name="phone1"
+                            label="Phone"
+                            rules={[
+                                {
+                                    pattern: /^[0-9]+$/,
+                                    message: `Please enter correct phone!`,
+                                },
+                            ]}
+                        >
                             <Input />
                         </Item>
                     </Form>
