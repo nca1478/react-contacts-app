@@ -1,23 +1,33 @@
 // Dependencies
-import React, { useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Form, Input, Button, Typography, notification } from 'antd';
+
+// Context
+import { AuthContext } from '../../context/auth';
 
 // Fetch Config
 import { put } from '../../config/api';
 
 // Icons
-import { UserOutlined, LockOutlined, ProfileTwoTone, MailOutlined } from '@ant-design/icons';
+import { UserOutlined, ProfileTwoTone, MailOutlined } from '@ant-design/icons';
+
+// Modals
+import PasswordForm from './modals/PasswordForm';
 
 // Styles
 import './User.css';
 
 // Antdesign
 const { Item } = Form;
-const { Password } = Input;
 const { Title } = Typography;
 
 const User = ({ userProfile }) => {
+    const {
+        user: { auth },
+    } = useContext(AuthContext);
     const [form] = Form.useForm();
+    const [isModalVisible, setIsModalVisible] = useState(false);
+    const [formValues, setFormValues] = useState({});
 
     useEffect(() => {
         form.setFieldsValue({
@@ -29,19 +39,19 @@ const User = ({ userProfile }) => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [userProfile]);
 
-    const onUpdate = async (data) => {
+    const onUpdate = async ({ password }) => {
+        setIsModalVisible(false);
         const dataUser = {
-            name: data.fullname,
-            email: data.email,
-            password: data.password,
-            token: data.token,
+            name: formValues.fullname,
+            email: formValues.email,
+            password,
         };
-        await put(`/users/${data.id}`, dataUser, dataUser.token)
+        await put('/users/update', dataUser, auth.user.token)
             .then((response) => {
                 if (response.data === null) {
                     notification['error']({
-                        message: 'Error',
-                        description: 'Error trying to updating user into the database.',
+                        message: 'Error Updating User',
+                        description: 'Error trying to updating user.',
                     });
                 } else {
                     notification['success']({
@@ -53,7 +63,7 @@ const User = ({ userProfile }) => {
             .catch((error) => {
                 notification['error']({
                     message: 'Error',
-                    description: 'Error trying to updating user into the database.',
+                    description: 'Error trying to updating user.',
                 });
                 console.log(error);
             });
@@ -62,8 +72,8 @@ const User = ({ userProfile }) => {
     const formSuccess = () => {
         form.validateFields()
             .then((values) => {
-                // form.resetFields();
-                onUpdate(values);
+                setFormValues(values);
+                setIsModalVisible(true);
             })
             .catch((info) => {
                 console.log('Validate Failed:', info);
@@ -74,12 +84,16 @@ const User = ({ userProfile }) => {
         console.log('Error: ', error);
     };
 
+    const onCancel = () => {
+        setIsModalVisible(false);
+    };
+
     return (
         <div className="container-profile">
             <div className="form">
                 <ProfileTwoTone style={{ fontSize: '70px', color: 'blue', marginBottom: '10px' }} />
                 <Title level={3} className="login-title">
-                    User Profile
+                    Update User Profile
                 </Title>
 
                 <Form
@@ -88,10 +102,6 @@ const User = ({ userProfile }) => {
                     onFinish={formSuccess}
                     onFinishFailed={formFailed}
                 >
-                    <Item name="id" hidden={true}>
-                        <Input />
-                    </Item>
-
                     <Item
                         name="fullname"
                         rules={[
@@ -128,31 +138,11 @@ const User = ({ userProfile }) => {
                         />
                     </Item>
 
-                    <Item
-                        name="password"
-                        rules={[
-                            {
-                                required: true,
-                                message: 'Please enter your password',
-                            },
-                            {
-                                pattern:
-                                    /^(?=.*\d)(?=.*[a-zA-Z])[0-9a-zA-Z!"#$%&()=?¿*-_.:,;+^\\-`.+,/]{8,}$/,
-                                message: `Password must have 8 characters and 1 number`,
-                            },
-                        ]}
-                        hasFeedback
-                    >
-                        <Password
-                            prefix={<LockOutlined className="site-form-item-icon" />}
-                            placeholder="Password"
-                            size="large"
-                        />
-                    </Item>
-
-                    <Item name="token" hidden={true}>
-                        <Input />
-                    </Item>
+                    <PasswordForm
+                        isModalVisible={isModalVisible}
+                        onUpdate={onUpdate}
+                        onCancel={onCancel}
+                    />
 
                     <Item>
                         <Button

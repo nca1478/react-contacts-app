@@ -31,6 +31,7 @@ const ContactForm = ({ currentContact, isModalVisible, onCreate, onUpdate, onCan
         } else {
             form.setFieldsValue(initialFieldsValue);
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [currentContact]);
 
     const onOk = () => {
@@ -58,6 +59,7 @@ const ContactForm = ({ currentContact, isModalVisible, onCreate, onUpdate, onCan
             onCancel={onCancel}
             destroyOnClose={true}
             width={500}
+            forceRender
             centered
         >
             <Row gutter={[16, 16]}>

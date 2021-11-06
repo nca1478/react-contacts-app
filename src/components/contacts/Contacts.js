@@ -21,7 +21,6 @@ import ContactForm from './modals/ContactForm';
 
 // Styles
 import './Contacts.css';
-// const dividerFontSize = { fontSize: '1.3rem' };
 
 // Antdesing
 const { confirm } = Modal;
