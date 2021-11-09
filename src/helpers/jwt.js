@@ -1,0 +1,24 @@
+import jwt from 'jsonwebtoken';
+import { JWT_SECRET } from '../constans/jwt';
+
+/**
+ * Decode JWT
+ * @param 	{String} 	token	String token
+ * @return	{Object}			Token information
+ */
+export const decode = async (token) => {
+    let decodedInfo = await new Promise((resolve, reject) => {
+        try {
+            jwt.verify(token, JWT_SECRET, (err, decoded) => {
+                if (err) {
+                    reject(err);
+                }
+                resolve(decoded);
+            });
+        } catch (error) {
+            console.log(error);
+            return error;
+        }
+    });
+    return decodedInfo;
+};
