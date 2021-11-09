@@ -50,7 +50,7 @@ const User = ({ userProfile }) => {
             .then((response) => {
                 if (response.data === null) {
                     notification['error']({
-                        message: 'Error Updating User',
+                        message: 'Error',
                         description: 'Error trying to updating user.',
                     });
                 } else {
@@ -93,7 +93,7 @@ const User = ({ userProfile }) => {
             <div className="form">
                 <ProfileTwoTone style={{ fontSize: '70px', color: 'blue', marginBottom: '10px' }} />
                 <Title level={3} className="login-title">
-                    Update User Profile
+                    User Profile
                 </Title>
 
                 <Form
@@ -151,7 +151,7 @@ const User = ({ userProfile }) => {
                             className="login-form-button"
                             size="large"
                         >
-                            Save
+                            Update
                         </Button>
                     </Item>
                 </Form>

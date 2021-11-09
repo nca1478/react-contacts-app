@@ -208,9 +208,12 @@ const Login = () => {
                         icon="fa-facebook"
                     />
 
-                    <Item style={{ textAlign: 'center' }}>
+                    <Item style={{ textAlign: 'center', marginTop: '10px' }}>
                         <span style={{ marginRight: '8px' }}>Do you need an account?</span>
                         <Link to="/auth/register">Register</Link>
+                        <br />
+                        <span style={{ marginRight: '8px' }}>Forgot your password?</span>
+                        <Link to="/auth/recover-password">Recover it</Link>
                     </Item>
                 </Form>
             </div>
