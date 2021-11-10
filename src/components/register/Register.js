@@ -30,9 +30,10 @@ const Register = () => {
     const formSuccess = (data) => {
         post('/users', data)
             .then((response) => {
+                console.log(response);
                 if (response.data === null) {
                     notification['error']({
-                        message: 'Login Error',
+                        message: 'Register Error',
                         description: 'Please verify the data entered and try again.',
                     });
                 } else {
@@ -47,7 +48,7 @@ const Register = () => {
             })
             .catch((error) => {
                 notification['error']({
-                    message: 'Login Error',
+                    message: 'Register Error',
                     description: 'Please verify the data entered and try again.',
                 });
                 console.log(error);
@@ -60,7 +61,7 @@ const Register = () => {
 
     return (
         <div className="container">
-            <div className="form">
+            <div className="form animate__animated animate__fadeIn">
                 <CheckCircleTwoTone
                     style={{ fontSize: '70px', color: 'blue', marginBottom: '10px' }}
                 />

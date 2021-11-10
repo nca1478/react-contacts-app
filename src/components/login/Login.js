@@ -37,7 +37,7 @@ const Login = () => {
                 if (response.data === null) {
                     notification['error']({
                         message: 'Login Error',
-                        description: 'Please verify the data entered and try again.',
+                        description: response.errors.msg,
                     });
                 } else {
                     const dataUser = {
@@ -122,7 +122,7 @@ const Login = () => {
 
     return (
         <div className="container-login">
-            <div className="form">
+            <div className="form animate__animated animate__fadeIn">
                 <CheckCircleTwoTone
                     style={{ fontSize: '70px', color: 'blue', marginBottom: '10px' }}
                 />

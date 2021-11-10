@@ -90,7 +90,7 @@ const User = ({ userProfile }) => {
 
     return (
         <div className="container-profile">
-            <div className="form">
+            <div className="form animate__animated animate__fadeIn">
                 <ProfileTwoTone style={{ fontSize: '70px', color: 'blue', marginBottom: '10px' }} />
                 <Title level={3} className="login-title">
                     User Profile

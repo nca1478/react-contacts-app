@@ -7,5 +7,6 @@ import App from './App';
 
 // Styles
 import './index.css';
+import 'animate.css';
 
 ReactDOM.render(<App />, document.getElementById('root'));

@@ -58,19 +58,21 @@ const ChangePassword = () => {
         setLoading(true);
         put(`/users/recovery/${token}`, dataUser)
             .then((response) => {
+                form.resetFields();
                 if (response.data === null) {
                     notification['error']({
                         message: 'Error',
                         description: 'Error changing password! Try again!.',
                     });
+                    setLoading(false);
                 } else {
                     notification['success']({
                         message: 'Success Operation',
                         description: response.data.msg,
                     });
+                    setLoading(false);
+                    setIsRecoveryPass(true);
                 }
-                setIsRecoveryPass(true);
-                form.resetFields();
             })
             .catch((error) => {
                 notification['error']({
@@ -78,9 +80,6 @@ const ChangePassword = () => {
                     description: 'Error changing password! Try again!.',
                 });
                 console.log(error);
-            })
-            .finally(() => {
-                setLoading(false);
             });
     };
 
@@ -92,7 +91,7 @@ const ChangePassword = () => {
         <Redirect to="/auth/login" />
     ) : (
         <div className="container-change">
-            <div className="form">
+            <div className="form animate__animated animate__fadeIn">
                 <CheckCircleTwoTone
                     style={{ fontSize: '70px', color: 'blue', marginBottom: '10px' }}
                 />

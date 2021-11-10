@@ -52,7 +52,6 @@ const PasswordForm = ({ isModalVisible, onUpdate, onCancel }) => {
                                 prefix={<LockOutlined className="site-form-item-icon" />}
                                 placeholder="Password"
                                 size="large"
-                                autoFocus
                             />
                         </Item>
                     </Form>

@@ -1,5 +1,4 @@
 import jwt from 'jsonwebtoken';
-import { JWT_SECRET } from '../constans/jwt';
 
 /**
  * Decode JWT
@@ -9,7 +8,7 @@ import { JWT_SECRET } from '../constans/jwt';
 export const decode = async (token) => {
     let decodedInfo = await new Promise((resolve, reject) => {
         try {
-            jwt.verify(token, JWT_SECRET, (err, decoded) => {
+            jwt.verify(token, process.env.REACT_APP_JWT_SECRET, (err, decoded) => {
                 if (err) {
                     reject(err);
                 }

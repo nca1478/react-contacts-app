@@ -55,7 +55,7 @@ const RecoverPassword = () => {
 
     return (
         <div className="container-recover">
-            <div className="form">
+            <div className="form animate__animated animate__fadeIn">
                 <MailTwoTone style={{ fontSize: '70px', color: 'blue', marginBottom: '10px' }} />
                 <Title level={3} className="login-title">
                     Recover Password
