@@ -13,9 +13,7 @@ import { put } from '../../config/api';
 import { getValueFromQuery } from '../../helpers/utils';
 import { decode } from '../../helpers/jwt';
 
-// Styles
-import './ChangePassword.css';
-
+// Antdesign
 const { Item } = Form;
 const { Password } = Input;
 const { Title } = Typography;
@@ -90,12 +88,12 @@ const ChangePassword = () => {
     return isRecoveryPass ? (
         <Redirect to="/auth/login" />
     ) : (
-        <div className="container-change">
+        <div className="container">
             <div className="form animate__animated animate__fadeIn">
                 <CheckCircleTwoTone
                     style={{ fontSize: '70px', color: 'blue', marginBottom: '10px' }}
                 />
-                <Title level={3} className="login-title">
+                <Title level={3} className="title">
                     Change Password
                 </Title>
 
@@ -106,7 +104,7 @@ const ChangePassword = () => {
                     onFinishFailed={formFailed}
                 >
                     {loading ? (
-                        <div className="form-spinner">
+                        <div className="form-spinner-change">
                             <Space size="middle">
                                 <Spin size="large" className="spinner" />
                             </Space>
@@ -176,7 +174,7 @@ const ChangePassword = () => {
                                 <Button
                                     type="primary"
                                     htmlType="submit"
-                                    className="login-form-button"
+                                    className="button-submit"
                                     size="large"
                                 >
                                     Save

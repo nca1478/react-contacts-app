@@ -14,9 +14,6 @@ import { UserOutlined, ProfileTwoTone, MailOutlined } from '@ant-design/icons';
 // Modals
 import PasswordForm from './modals/PasswordForm';
 
-// Styles
-import './User.css';
-
 // Antdesign
 const { Item } = Form;
 const { Title } = Typography;
@@ -92,16 +89,11 @@ const User = ({ userProfile }) => {
         <div className="container-profile">
             <div className="form animate__animated animate__fadeIn">
                 <ProfileTwoTone style={{ fontSize: '70px', color: 'blue', marginBottom: '10px' }} />
-                <Title level={3} className="login-title">
+                <Title level={3} className="title">
                     User Profile
                 </Title>
 
-                <Form
-                    form={form}
-                    name="user-form"
-                    onFinish={formSuccess}
-                    onFinishFailed={formFailed}
-                >
+                <Form form={form} name="form" onFinish={formSuccess} onFinishFailed={formFailed}>
                     <Item
                         name="fullname"
                         rules={[
@@ -148,7 +140,7 @@ const User = ({ userProfile }) => {
                         <Button
                             type="primary"
                             htmlType="submit"
-                            className="login-form-button"
+                            className="button-submit"
                             size="large"
                         >
                             Update

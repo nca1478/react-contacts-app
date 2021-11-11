@@ -19,9 +19,6 @@ import { AuthContext } from '../../context/auth';
 // Modals
 import ContactForm from './modals/ContactForm';
 
-// Styles
-import './Contacts.css';
-
 // Antdesing
 const { confirm } = Modal;
 const { Search } = Input;

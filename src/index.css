@@ -12,6 +12,7 @@ code {
     font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 }
 
+/* General Styles */
 .App {
     text-align: center;
     min-height: 100vh;
@@ -25,4 +26,125 @@ code {
     justify-content: space-around;
     font-size: calc(10px + 2vmin);
     color: white;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background-color: #f1f1f1;
+}
+
+.container .form {
+    width: 400px;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    padding: 40px 40px 20px 40px;
+    display: flex;
+    flex-direction: column;
+    background-color: #ffffff;
+    box-shadow: 0px 10px 34px -15px rgba(0, 0, 0, 0.24);
+}
+
+.container .title {
+    text-align: center;
+    margin-bottom: 20px !important;
+}
+
+.button-submit {
+    width: 100%;
+}
+
+/* Recover */
+.container .form-spinner-recover {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 318px;
+    height: 130px;
+}
+
+.container .form-spinner-change {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 318px;
+    height: 194px;
+}
+
+/* Login */
+.google-button {
+    text-align: center;
+}
+
+.facebook-button {
+    font-size: 1rem;
+    background-color: #4c69ba;
+    color: white;
+    border: none;
+    padding: 8px 20px;
+    margin-top: 10px;
+    border-radius: 2px;
+    cursor: pointer;
+}
+
+.facebook-button span {
+    margin-left: 10px;
+}
+
+.facebook-button:hover {
+    filter: brightness(110%);
+    transition: all 0.5s;
+}
+
+/* User Profile */
+.container-profile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #f1f1f1;
+}
+
+.container-profile .form {
+    width: 400px;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    padding: 40px 40px 20px 40px;
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    background-color: #ffffff;
+    box-shadow: 0px 10px 34px -15px rgba(0, 0, 0, 0.24);
+}
+
+/* Contacts */
+.button-add {
+    position: fixed;
+    right: 5%;
+    bottom: 10%;
+    font-size: 30px !important;
+    height: 60px !important;
+    width: 60px !important;
+    border: none;
+}
+
+.ant-btn-icon-only.ant-btn-lg {
+    height: 60px !important;
+    width: 60px !important;
+}
+
+.box-filtering {
+    width: 100%;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    padding: 20px 20px 0px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    background-color: #ffffff;
 }

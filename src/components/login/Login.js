@@ -15,7 +15,6 @@ import { AuthContext } from '../../context/auth';
 import { post } from '../../config/api';
 
 // Styles
-import './Login.css';
 const dividerFontSize = { fontSize: '1rem' };
 
 // Antdesign
@@ -121,16 +120,16 @@ const Login = () => {
     };
 
     return (
-        <div className="container-login">
+        <div className="container">
             <div className="form animate__animated animate__fadeIn">
                 <CheckCircleTwoTone
                     style={{ fontSize: '70px', color: 'blue', marginBottom: '10px' }}
                 />
-                <Title level={3} className="login-title">
+                <Title level={3} className="title">
                     React Contacts App
                 </Title>
 
-                <Form name="login-form" onFinish={formSuccess} onFinishFailed={formFailed}>
+                <Form name="form" onFinish={formSuccess} onFinishFailed={formFailed}>
                     <Item
                         name="email"
                         rules={[
@@ -168,7 +167,7 @@ const Login = () => {
                         <Button
                             type="primary"
                             htmlType="submit"
-                            className="login-form-button"
+                            className="button-submit"
                             size="large"
                         >
                             Login
@@ -184,7 +183,7 @@ const Login = () => {
                             <Button
                                 type="primary"
                                 htmlType="submit"
-                                className="login-form-button"
+                                className="button-submit"
                                 size="large"
                                 onClick={renderProps.onClick}
                                 disabled={renderProps.disabled}
@@ -203,7 +202,7 @@ const Login = () => {
                     <FacebookLogin
                         appId={process.env.REACT_APP_FACEBOOK_APP_ID}
                         callback={responseFacebook}
-                        cssClass="login-form-button facebook-button"
+                        cssClass="button-submit facebook-button"
                         textButton={<span>Login with Facebook</span>}
                         icon="fa-facebook"
                     />

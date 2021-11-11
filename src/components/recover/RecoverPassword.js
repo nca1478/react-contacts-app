@@ -9,9 +9,6 @@ import { MailTwoTone, MailOutlined } from '@ant-design/icons';
 // Fetch Config
 import { put } from '../../config/api';
 
-// Styles
-import './RecoverPassword.css';
-
 // Antdesign
 const { Item } = Form;
 const { Title } = Typography;
@@ -54,21 +51,16 @@ const RecoverPassword = () => {
     };
 
     return (
-        <div className="container-recover">
+        <div className="container">
             <div className="form animate__animated animate__fadeIn">
                 <MailTwoTone style={{ fontSize: '70px', color: 'blue', marginBottom: '10px' }} />
-                <Title level={3} className="login-title">
+                <Title level={3} className="title">
                     Recover Password
                 </Title>
 
-                <Form
-                    form={form}
-                    name="formulario"
-                    onFinish={formSuccess}
-                    onFinishFailed={formFailed}
-                >
+                <Form form={form} name="form" onFinish={formSuccess} onFinishFailed={formFailed}>
                     {loading ? (
-                        <div className="form-spinner">
+                        <div className="form-spinner-recover">
                             <Space size="middle">
                                 <Spin size="large" className="spinner" />
                             </Space>
@@ -100,7 +92,7 @@ const RecoverPassword = () => {
                                 <Button
                                     type="primary"
                                     htmlType="submit"
-                                    className="login-form-button"
+                                    className="button-submit"
                                     size="large"
                                 >
                                     Send Email

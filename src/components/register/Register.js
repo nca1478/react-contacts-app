@@ -12,9 +12,6 @@ import { AuthContext } from '../../context/auth';
 // Fetch Config
 import { post } from '../../config/api';
 
-// Styles
-import './Register.css';
-
 const { Item } = Form;
 const { Password } = Input;
 const { Title } = Typography;
@@ -65,11 +62,11 @@ const Register = () => {
                 <CheckCircleTwoTone
                     style={{ fontSize: '70px', color: 'blue', marginBottom: '10px' }}
                 />
-                <Title level={3} className="login-title">
+                <Title level={3} className="title">
                     Create an Account
                 </Title>
 
-                <Form name="formulario" onFinish={formSuccess} onFinishFailed={formFailed}>
+                <Form name="form" onFinish={formSuccess} onFinishFailed={formFailed}>
                     <Item
                         name="name"
                         rules={[
@@ -168,7 +165,7 @@ const Register = () => {
                         <Button
                             type="primary"
                             htmlType="submit"
-                            className="login-form-button"
+                            className="button-submit"
                             size="large"
                         >
                             Register
