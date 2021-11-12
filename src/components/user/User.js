@@ -12,7 +12,7 @@ import { put } from '../../config/api';
 import { UserOutlined, ProfileTwoTone, MailOutlined } from '@ant-design/icons';
 
 // Modals
-import PasswordForm from './modals/PasswordForm';
+import PasswordForm from './modal/PasswordForm';
 
 // Antdesign
 const { Item } = Form;

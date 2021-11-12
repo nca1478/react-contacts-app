@@ -1,14 +1,10 @@
 // Dependencies
 import React, { useContext, useEffect, useState } from 'react';
-import { Button, Table, Space, notification, Modal, Input } from 'antd';
+import { Button, Table, notification, Modal, Input } from 'antd';
+import { useMediaQuery } from 'react-responsive';
 
 // Icons
-import {
-    PlusOutlined,
-    FormOutlined,
-    DeleteTwoTone,
-    ExclamationCircleOutlined,
-} from '@ant-design/icons';
+import { PlusOutlined, ExclamationCircleOutlined } from '@ant-design/icons';
 
 // Api
 import { get, post, put, del } from '../../config/api';
@@ -17,7 +13,10 @@ import { get, post, put, del } from '../../config/api';
 import { AuthContext } from '../../context/auth';
 
 // Modals
-import ContactForm from './modals/ContactForm';
+import ContactForm from './modal/ContactForm';
+
+// Table Columns Settings
+import columns from './table/columns';
 
 // Antdesing
 const { confirm } = Modal;
@@ -34,56 +33,13 @@ const Contacts = () => {
     const [totalPages, setTotalPages] = useState(1);
     const [page, setPage] = useState(1);
     const [pageSize, setPageSize] = useState(5);
+    const isSmallDevice = useMediaQuery({ query: '(max-width: 576px)' });
 
     useEffect(() => {
         fetchCountContacts();
         fetchContacts();
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
-
-    const columns = [
-        {
-            title: 'Name',
-            dataIndex: 'name',
-            key: 'name',
-            responsive: ['md', 'sm', 'xs'],
-        },
-        {
-            title: 'Cellphone',
-            dataIndex: 'celphone1',
-            key: 'celphone1',
-            responsive: ['md'],
-        },
-        {
-            title: 'Email',
-            dataIndex: 'email',
-            key: 'email',
-            responsive: ['md'],
-        },
-        {
-            title: 'Action',
-            key: 'action',
-            render: (record) => {
-                return (
-                    <Space size="middle">
-                        <a href="/#">
-                            <FormOutlined
-                                style={{ fontSize: 25 }}
-                                onClick={() => handleEditClick(record)}
-                            />
-                        </a>
-                        <a href="/#">
-                            <DeleteTwoTone
-                                style={{ fontSize: 25 }}
-                                onClick={() => handleDeleteClick({ id: record._id })}
-                            />
-                        </a>
-                    </Space>
-                );
-            },
-            responsive: ['md', 'sm', 'xs'],
-        },
-    ];
 
     const fetchCountContacts = async () => {
         await get('/contacts/count', auth.user.token)
@@ -244,6 +200,7 @@ const Contacts = () => {
             onCancel() {
                 console.log('Cancel Delete!');
             },
+            centered: true,
         });
     };
 
@@ -270,23 +227,25 @@ const Contacts = () => {
         fetchContactsByName(value);
     };
 
+    // Get Table Columns Settings
+    const cols = columns(isSmallDevice, handleEditClick, handleDeleteClick);
+
     return (
         <div>
-            {/* <Divider style={dividerFontSize}>Contacts</Divider> */}
             <div className="box-filtering">
                 <Search
                     autoFocus
                     placeholder="Input name text"
                     allowClear
                     enterButton="Search"
-                    size="large"
+                    // size="large"
                     onSearch={onSearch}
-                    style={{ width: '50%', marginBottom: '20px' }}
+                    className="search"
                 />
             </div>
 
             <Table
-                columns={columns}
+                columns={cols}
                 dataSource={contacts}
                 loading={loading}
                 rowKey="_id"
