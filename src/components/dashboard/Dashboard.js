@@ -89,9 +89,7 @@ const Dashboard = () => {
                     {menuItem === '2' && <Contacts />}
                     {menuItem === '4' && <User userProfile={auth.user} />}
                 </Content>
-                <Footer style={{ textAlign: 'center' }}>
-                    Copyright &copy; 2021 - React Contacts App
-                </Footer>
+                <Footer className="footer">Copyright &copy; 2022 - React Contacts App</Footer>
             </Layout>
         </div>
     );

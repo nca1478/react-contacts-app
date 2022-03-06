@@ -1,6 +1,8 @@
 // Dependencies
 import React, { useEffect, useState } from 'react';
+import queryString from 'query-string';
 import { useHistory, Link, Redirect } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import { Form, Input, Button, Typography, notification, Spin, Space } from 'antd';
 
 // Components
@@ -10,8 +12,8 @@ import { LockOutlined, CheckCircleTwoTone } from '@ant-design/icons';
 import { put } from '../../config/api';
 
 // Helpers
-import { getValueFromQuery } from '../../helpers/utils';
 import { decode } from '../../helpers/jwt';
+import { capitalize } from '../../helpers/utils';
 
 // Antdesign
 const { Item } = Form;
@@ -20,6 +22,7 @@ const { Title } = Typography;
 
 const ChangePassword = () => {
     const history = useHistory();
+    const location = useLocation();
     const [form] = Form.useForm();
     const [token, setToken] = useState(false);
     const [infoToken, setInfoToken] = useState(null);
@@ -28,10 +31,10 @@ const ChangePassword = () => {
     const [loading, setLoading] = useState(false);
 
     useEffect(() => {
-        const token = getValueFromQuery(history.location.search, 'token');
+        const { token = '' } = queryString.parse(location.search);
 
         if (token === '') {
-            history.push('/404');
+            history.replace('/404');
         }
 
         const decodeToken = async () => {
@@ -45,8 +48,17 @@ const ChangePassword = () => {
 
         decodeToken();
         setToken(token);
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
+    }, [location]);
+
+    useEffect(() => {
+        if (errorToken) {
+            notification['error']({
+                message: 'Error Token',
+                description: capitalize(errorToken.message),
+            });
+            console.log(errorToken);
+        }
+    }, [errorToken]);
 
     const formSuccess = (data) => {
         const dataUser = {

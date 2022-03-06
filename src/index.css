@@ -125,7 +125,7 @@ code {
 .button-add {
     position: fixed;
     right: 5%;
-    bottom: 10%;
+    bottom: 6%;
     font-size: 30px !important;
     height: 60px !important;
     width: 60px !important;
@@ -159,4 +159,10 @@ code {
     .box-filtering .search {
         width: 100%;
     }
+}
+
+/* Dashboard */
+.footer {
+    background: #001529;
+    color: rgba(255, 255, 255, 0.65);
 }
