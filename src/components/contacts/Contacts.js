@@ -1,6 +1,6 @@
 // Dependencies
 import React, { useContext, useEffect, useState } from 'react';
-import { Button, Table, notification, Modal, Input } from 'antd';
+import { Button, Table, notification, Modal, Input, Divider } from 'antd';
 import { useMediaQuery } from 'react-responsive';
 
 // Icons
@@ -21,6 +21,9 @@ import columns from './table/columns';
 // Antdesing
 const { confirm } = Modal;
 const { Search } = Input;
+
+// Styles
+const dividerFontSize = { fontSize: '1.5rem' };
 
 const Contacts = () => {
     const {
@@ -232,6 +235,11 @@ const Contacts = () => {
 
     return (
         <div>
+            <Divider style={dividerFontSize}>
+                {auth.user.name}
+                {"'s"} Contacts
+            </Divider>
+
             <div className="box-filtering">
                 <Search
                     autoFocus

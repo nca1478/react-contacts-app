@@ -5,7 +5,6 @@ import { Layout, Menu, Avatar } from 'antd';
 
 // Components
 import Contacts from '../contacts/Contacts';
-import Home from '../home/Home';
 import User from '../user/User';
 
 // Context
@@ -55,10 +54,10 @@ const Dashboard = () => {
                 <Header>
                     <div className="logo" />
                     <Menu theme="dark" mode="horizontal" defaultSelectedKeys={[menuItem]}>
-                        <Menu.Item onClick={() => setMenuItem('1')} key="1">
+                        {/* <Menu.Item onClick={() => setMenuItem('1')} key="1">
                             Home
-                        </Menu.Item>
-                        <Menu.Item onClick={() => setMenuItem('2')} key="2">
+                        </Menu.Item> */}
+                        <Menu.Item onClick={() => setMenuItem('1')} key="1">
                             Contacts
                         </Menu.Item>
 
@@ -73,7 +72,7 @@ const Dashboard = () => {
                             }
                         >
                             {loaded && !(auth.user.google || auth.user.facebook) ? (
-                                <Menu.Item onClick={() => setMenuItem('4')} key="4">
+                                <Menu.Item onClick={() => setMenuItem('2')} key="2">
                                     Profile
                                 </Menu.Item>
                             ) : null}
@@ -85,9 +84,9 @@ const Dashboard = () => {
                     </Menu>
                 </Header>
                 <Content style={{ padding: '0 50px', minHeight: 'calc(100vh - 134px)' }}>
-                    {menuItem === '1' && <Home />}
-                    {menuItem === '2' && <Contacts />}
-                    {menuItem === '4' && <User userProfile={auth.user} />}
+                    {/* {menuItem === '1' && <Home />} */}
+                    {menuItem === '1' && <Contacts />}
+                    {menuItem === '2' && <User userProfile={auth.user} />}
                 </Content>
                 <Footer className="footer">Copyright &copy; 2022 - React Contacts App</Footer>
             </Layout>

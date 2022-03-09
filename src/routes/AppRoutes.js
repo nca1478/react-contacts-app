@@ -1,5 +1,5 @@
 // Dependencies
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 // Context
@@ -16,6 +16,7 @@ import { AuthRouter } from './AuthRouter';
 
 const AppRoutes = () => {
     const { rehydrate, isAuthenticated } = useContext(AuthContext);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         if (isAuthenticated) {
@@ -23,6 +24,20 @@ const AppRoutes = () => {
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
+
+    useEffect(() => {
+        setTimeout(() => {
+            setLoading(false);
+        }, 1000);
+    }, [setLoading]);
+
+    if (loading) {
+        return (
+            <div className="preloader-container">
+                <div className="preloader"></div>
+            </div>
+        );
+    }
 
     return (
         <Router>

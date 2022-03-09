@@ -48,7 +48,7 @@ const ChangePassword = () => {
 
         decodeToken();
         setToken(token);
-    }, [location]);
+    }, [location, history]);
 
     useEffect(() => {
         if (errorToken) {
