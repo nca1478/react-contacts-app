@@ -1,4 +1,4 @@
-const baseUrl = 'http://localhost:4000/api/v1';
+const baseUrl = process.env.REACT_APP_API_URL;
 
 const get = (pathUrl, token) =>
     fetch(`${baseUrl}${pathUrl}`, {
