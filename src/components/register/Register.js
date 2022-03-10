@@ -27,7 +27,6 @@ const Register = () => {
     const formSuccess = (data) => {
         post('/users', data)
             .then((response) => {
-                console.log(response);
                 if (response.data === null) {
                     notification['error']({
                         message: 'Register Error',
