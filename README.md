@@ -5,17 +5,17 @@
 ## Features
 
 - User contacts database. 
-- `CRUD` features.
-- `Local, Google and Facebook` login auth.
+- CRUD features.
+- Local, Google and Facebook login auth.
 - Register account form.
-- `Recover password` form.
-- `Email Notification`.
-- Database hosted by `MongoDB Atlas`.
-- Backend stack: `NodeJS, Express and Mongoose`.
+- Recover password form.
+- Email Notification.
+- Database hosted by MongoDB Atlas.
+- Backend stack: NodeJS, Express and Mongoose.
 - Public and Private Routes.
-- State Manage Component through `useState` hook.
-- Manage state globally through `useContext` hook.
-- For handling forms, i use `useForm` custom hook.
+- State Manage Component through useState hook.
+- Manage state globally through useContext hook.
+- For handling forms, i use useForm custom hook.
 
 ## General Information
 
