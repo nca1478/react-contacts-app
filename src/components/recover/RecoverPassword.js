@@ -84,6 +84,7 @@ const RecoverPassword = () => {
                                     prefix={<MailOutlined className="site-form-item-icon" />}
                                     placeholder="Enter your email..."
                                     size="large"
+                                    autoComplete="off"
                                     autoFocus
                                 />
                             </Item>

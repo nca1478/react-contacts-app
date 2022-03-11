@@ -236,7 +236,7 @@ const Contacts = () => {
     return (
         <div>
             <Divider style={dividerFontSize}>
-                {auth.user.name}
+                {auth.user.name.split(' ', 1)}
                 {"'s"} Contacts
             </Divider>
 

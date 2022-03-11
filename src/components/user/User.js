@@ -107,6 +107,7 @@ const User = ({ userProfile }) => {
                             prefix={<UserOutlined className="site-form-item-icon" />}
                             placeholder="Fullname"
                             size="large"
+                            autoComplete="off"
                         />
                     </Item>
 
@@ -127,6 +128,7 @@ const User = ({ userProfile }) => {
                             prefix={<MailOutlined className="site-form-item-icon" />}
                             placeholder="Email"
                             size="large"
+                            autoComplete="off"
                         />
                     </Item>
 

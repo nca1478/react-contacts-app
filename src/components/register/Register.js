@@ -79,6 +79,7 @@ const Register = () => {
                             prefix={<UserOutlined className="site-form-item-icon" />}
                             placeholder="Fullname..."
                             size="large"
+                            autoComplete="off"
                         />
                     </Item>
 
@@ -98,6 +99,7 @@ const Register = () => {
                         <Input
                             prefix={<MailOutlined className="site-form-item-icon" />}
                             placeholder="Email..."
+                            autoComplete="off"
                             size="large"
                         />
                     </Item>

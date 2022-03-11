@@ -1,5 +1,6 @@
 @import 'antd/dist/antd.css';
 
+/* General Styles */
 body {
     margin: 0;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu',
@@ -12,7 +13,6 @@ code {
     font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 }
 
-/* General Styles */
 .App {
     text-align: center;
     min-height: 100vh;
@@ -30,10 +30,9 @@ code {
 
 .container {
     display: flex;
-    flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: 100vh;
+    min-height: 100vh;
     background-color: #f1f1f1;
 }
 
@@ -55,23 +54,6 @@ code {
 
 .button-submit {
     width: 100%;
-}
-
-/* Recover */
-.container .form-spinner-recover {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 318px;
-    height: 130px;
-}
-
-.container .form-spinner-change {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 318px;
-    height: 194px;
 }
 
 /* Login */
@@ -99,26 +81,26 @@ code {
     transition: all 0.5s;
 }
 
-/* User Profile */
-.container-profile {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 75vh;
-    background-color: #f1f1f1;
+/* Dashboard */
+
+/* Menu / Content */
+@media (max-width: 480px) {
+    .ant-layout-content,
+    .ant-layout-header {
+        padding: 0 10px !important;
+    }
 }
 
-.container-profile .form {
-    width: 400px;
-    border: 1px solid #ddd;
-    border-radius: 3px;
-    padding: 40px 40px 20px 40px;
-    margin-top: 20px;
-    display: flex;
-    flex-direction: column;
-    background-color: #ffffff;
-    box-shadow: 0px 10px 34px -15px rgba(0, 0, 0, 0.24);
+@media (min-width: 481px) {
+    .ant-layout-content,
+    .ant-layout-header {
+        padding: 0 70px !important;
+    }
+}
+
+.footer {
+    background: #001529;
+    color: rgba(255, 255, 255, 0.65);
 }
 
 /* Contacts */
@@ -161,10 +143,42 @@ code {
     }
 }
 
-/* Dashboard */
-.footer {
-    background: #001529;
-    color: rgba(255, 255, 255, 0.65);
+/* User Profile */
+.container-profile {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 75vh;
+    background-color: #f1f1f1;
+}
+
+.container-profile .form {
+    width: 500px;
+    margin: 0;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    padding: 40px 40px 20px 40px;
+    display: flex;
+    flex-direction: column;
+    background-color: #ffffff;
+    box-shadow: 0px 10px 34px -15px rgba(0, 0, 0, 0.24);
+}
+
+/* Recover */
+.container .form-spinner-recover {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 318px;
+    height: 130px;
+}
+
+.container .form-spinner-change {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 318px;
+    height: 194px;
 }
 
 /* Preloaded */

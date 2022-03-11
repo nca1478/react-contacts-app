@@ -143,6 +143,7 @@ const Login = () => {
                             prefix={<UserOutlined className="site-form-item-icon" />}
                             placeholder="Username"
                             size="large"
+                            autoComplete="off"
                         />
                     </Item>
 
@@ -205,6 +206,7 @@ const Login = () => {
                         cssClass="button-submit facebook-button"
                         textButton={<span>Login with Facebook</span>}
                         icon="fa-facebook"
+                        disableMobileRedirect={true}
                     />
 
                     <Item style={{ textAlign: 'center', marginTop: '10px' }}>

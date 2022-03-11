@@ -79,7 +79,7 @@ const ContactForm = ({ currentContact, isModalVisible, onCreate, onUpdate, onCan
                                 },
                             ]}
                         >
-                            <Input />
+                            <Input autoComplete="off" />
                         </Item>
 
                         <Item
@@ -96,7 +96,7 @@ const ContactForm = ({ currentContact, isModalVisible, onCreate, onUpdate, onCan
                                 },
                             ]}
                         >
-                            <Input />
+                            <Input autoComplete="off" />
                         </Item>
 
                         <Item
@@ -113,7 +113,7 @@ const ContactForm = ({ currentContact, isModalVisible, onCreate, onUpdate, onCan
                                 },
                             ]}
                         >
-                            <Input />
+                            <Input autoComplete="off" />
                         </Item>
 
                         <Item
@@ -126,7 +126,7 @@ const ContactForm = ({ currentContact, isModalVisible, onCreate, onUpdate, onCan
                                 },
                             ]}
                         >
-                            <Input />
+                            <Input autoComplete="off" />
                         </Item>
 
                         <Item
@@ -139,7 +139,7 @@ const ContactForm = ({ currentContact, isModalVisible, onCreate, onUpdate, onCan
                                 },
                             ]}
                         >
-                            <Input />
+                            <Input autoComplete="off" />
                         </Item>
                     </Form>
                 </Col>
