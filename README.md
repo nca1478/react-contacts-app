@@ -45,11 +45,11 @@
 
 ## Demo
 
-- [Calendar App](https://google.com)
+- [Calendar App](https://contacts-app-njca.netlify.app/)
 
 ## Backend Repo
 
-- [Calendar Api](https://google.com)
+- [Calendar Api](https://github.com/nca1478/react-contacts-api)
 
 ## Requirements
 
