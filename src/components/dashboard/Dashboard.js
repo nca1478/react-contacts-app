@@ -82,7 +82,13 @@ const Dashboard = () => {
                     {menuItem === '1' && <Contacts />}
                     {menuItem === '2' && <User userProfile={auth.user} />}
                 </Content>
-                <Footer className="footer">Copyright &copy; 2022 - React Contacts App</Footer>
+                <Footer className="footer">
+                    Copyright &copy; 2022 <br />
+                    Developed by:{' '}
+                    <a href="https://nelsoncadenas.netlify.app/" target="_blank" rel="noreferrer">
+                        Nelson Cadenas
+                    </a>
+                </Footer>
             </Layout>
         </div>
     );
