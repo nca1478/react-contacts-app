@@ -29,8 +29,8 @@ const Register = () => {
             .then((response) => {
                 if (response.data === null) {
                     notification['error']({
-                        message: 'Register Error',
-                        description: 'Please verify the data entered and try again.',
+                        message: 'Error de Registro',
+                        description: 'Verifica los datos ingresados y vuelve a intentarlo.',
                     });
                 } else {
                     const dataUser = {
@@ -44,8 +44,8 @@ const Register = () => {
             })
             .catch((error) => {
                 notification['error']({
-                    message: 'Register Error',
-                    description: 'Please verify the data entered and try again.',
+                    message: 'Error de Registro',
+                    description: 'Verifica los datos ingresados y vuelve a intentarlo.',
                 });
                 console.log(error);
             });
@@ -62,7 +62,7 @@ const Register = () => {
                     style={{ fontSize: '70px', color: 'blue', marginBottom: '10px' }}
                 />
                 <Title level={3} className="title">
-                    Create an Account
+                    Crear una cuenta
                 </Title>
 
                 <Form name="form" onFinish={formSuccess} onFinishFailed={formFailed}>
@@ -71,13 +71,13 @@ const Register = () => {
                         rules={[
                             {
                                 required: true,
-                                message: 'Please enter your fullname',
+                                message: 'Por favor ingresa tu nombre completo',
                             },
                         ]}
                     >
                         <Input
                             prefix={<UserOutlined className="site-form-item-icon" />}
-                            placeholder="Fullname..."
+                            placeholder="Nombre Completo..."
                             size="large"
                             autoComplete="off"
                         />
@@ -88,11 +88,11 @@ const Register = () => {
                         rules={[
                             {
                                 required: true,
-                                message: 'Please enter your email',
+                                message: 'Por favor ingresa tu correo electrónico',
                             },
                             {
                                 type: 'email',
-                                message: 'The input is not valid email!',
+                                message: '¡La entrada no es un correo electrónico válido!',
                             },
                         ]}
                     >
@@ -109,19 +109,19 @@ const Register = () => {
                         rules={[
                             {
                                 required: true,
-                                message: 'Please enter your password',
+                                message: 'Por favor, ingresa tu contraseña',
                             },
                             {
                                 pattern:
                                     /^(?=.*\d)(?=.*[a-zA-Z])[0-9a-zA-Z!"#$%&()=?¿*-_.:,;+^\\-`.+,/]{8,}$/,
-                                message: `Password must have 8 characters and 1 number`,
+                                message: `La contraseña debe tener 8 caracteres y 1 número`,
                             },
                         ]}
                         hasFeedback
                     >
                         <Password
                             prefix={<LockOutlined className="site-form-item-icon" />}
-                            placeholder="Password..."
+                            placeholder="Contraseña..."
                             size="large"
                         />
                     </Item>
@@ -133,12 +133,12 @@ const Register = () => {
                         rules={[
                             {
                                 required: true,
-                                message: 'Please confirm your password!',
+                                message: '¡Por favor, confirma tu contraseña!',
                             },
                             {
                                 pattern:
                                     /^(?=.*\d)(?=.*[a-zA-Z])[0-9a-zA-Z!"#$%&()=?¿*-_.:,;+^\\-`.+,/]{8,}$/,
-                                message: `Password must have 8 characters and 1 number`,
+                                message: `La contraseña debe tener 8 caracteres y 1 número`,
                             },
                             ({ getFieldValue }) => ({
                                 validator(_, value) {
@@ -148,7 +148,7 @@ const Register = () => {
 
                                     return Promise.reject(
                                         new Error(
-                                            'The two passwords that you entered do not match!',
+                                            '¡Las dos contraseñas que ingresaste no coinciden!',
                                         ),
                                     );
                                 },
@@ -157,7 +157,7 @@ const Register = () => {
                     >
                         <Password
                             prefix={<LockOutlined className="site-form-item-icon" />}
-                            placeholder="Confirm Password..."
+                            placeholder="Confirmar Contraseña..."
                             size="large"
                         />
                     </Item>
@@ -169,12 +169,12 @@ const Register = () => {
                             className="button-submit"
                             size="large"
                         >
-                            Register
+                            Registrar
                         </Button>
                     </Item>
 
                     <Item style={{ textAlign: 'center' }}>
-                        <span style={{ marginRight: '8px' }}>Do you already have an account?</span>
+                        <span style={{ marginRight: '8px' }}>¿Ya tienes una cuenta?</span>
                         <Link to="/auth/login">Login</Link>
                     </Item>
                 </Form>

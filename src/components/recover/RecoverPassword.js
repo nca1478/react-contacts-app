@@ -28,7 +28,7 @@ const RecoverPassword = () => {
                     });
                 } else {
                     notification['success']({
-                        message: 'Success Operation',
+                        message: 'Operación Exitosa',
                         description: response.data.msg,
                     });
                 }
@@ -37,7 +37,7 @@ const RecoverPassword = () => {
             .catch((error) => {
                 notification['error']({
                     message: 'Error',
-                    description: 'Error sending email!, Try again.',
+                    description: '¡Error al enviar el email! Inténtalo de nuevo.',
                 });
                 console.log(error);
             })
@@ -55,7 +55,7 @@ const RecoverPassword = () => {
             <div className="form animate__animated animate__fadeIn">
                 <MailTwoTone style={{ fontSize: '70px', color: 'blue', marginBottom: '10px' }} />
                 <Title level={3} className="title">
-                    Recover Password
+                    Recuperar Contraseña
                 </Title>
 
                 <Form form={form} name="form" onFinish={formSuccess} onFinishFailed={formFailed}>
@@ -72,17 +72,17 @@ const RecoverPassword = () => {
                                 rules={[
                                     {
                                         required: true,
-                                        message: 'Please enter your email',
+                                        message: 'Por favor ingresa tu correo electrónico',
                                     },
                                     {
                                         type: 'email',
-                                        message: 'The input is not valid email!',
+                                        message: '¡La entrada no es un correo electrónico válido!',
                                     },
                                 ]}
                             >
                                 <Input
                                     prefix={<MailOutlined className="site-form-item-icon" />}
-                                    placeholder="Enter your email..."
+                                    placeholder="Ingresa tu correo electrónico..."
                                     size="large"
                                     autoComplete="off"
                                     autoFocus
@@ -96,14 +96,14 @@ const RecoverPassword = () => {
                                     className="button-submit"
                                     size="large"
                                 >
-                                    Send Email
+                                    Enviar Email
                                 </Button>
                             </Item>
                         </div>
                     )}
 
                     <Item style={{ textAlign: 'center' }}>
-                        <span style={{ marginRight: '8px' }}>Do you already have an account?</span>
+                        <span style={{ marginRight: '8px' }}>¿Ya tienes una cuenta?</span>
                         <Link to="/auth/login">Login</Link>
                     </Item>
                 </Form>

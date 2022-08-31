@@ -11,10 +11,10 @@ const NotFound = ({ history }) => {
             <Result
                 status="404"
                 title="404"
-                subTitle="Sorry, the page you visited does not exist."
+                subTitle="Lo sentimos, la página que visitaste no existe."
                 extra={
                     <Button type="primary" onClick={handleClick}>
-                        Go Home
+                        Ir a Inicio
                     </Button>
                 }
             />

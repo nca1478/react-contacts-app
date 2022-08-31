@@ -72,12 +72,12 @@ const ChangePassword = () => {
                 if (response.data === null) {
                     notification['error']({
                         message: 'Error',
-                        description: 'Error changing password! Try again!.',
+                        description: '¡Error al cambiar la contraseña! ¡Intentar otra vez!.',
                     });
                     setLoading(false);
                 } else {
                     notification['success']({
-                        message: 'Success Operation',
+                        message: 'Operación Exitosa',
                         description: response.data.msg,
                     });
                     setLoading(false);
@@ -87,7 +87,7 @@ const ChangePassword = () => {
             .catch((error) => {
                 notification['error']({
                     message: 'Error',
-                    description: 'Error changing password! Try again!.',
+                    description: '¡Error al cambiar la contraseña! ¡Intentar otra vez!.',
                 });
                 console.log(error);
             });
@@ -106,7 +106,7 @@ const ChangePassword = () => {
                     style={{ fontSize: '70px', color: 'blue', marginBottom: '10px' }}
                 />
                 <Title level={3} className="title">
-                    Change Password
+                    Cambiar Contraseña
                 </Title>
 
                 <Form
@@ -128,19 +128,19 @@ const ChangePassword = () => {
                                 rules={[
                                     {
                                         required: true,
-                                        message: 'Please enter your password',
+                                        message: 'Por favor, ingresa tu contraseña',
                                     },
                                     {
                                         pattern:
                                             /^(?=.*\d)(?=.*[a-zA-Z])[0-9a-zA-Z!"#$%&()=?¿*-_.:,;+^\\-`.+,/]{8,}$/,
-                                        message: `Password must have 8 characters and 1 number`,
+                                        message: `La contraseña debe tener 8 caracteres y 1 número`,
                                     },
                                 ]}
                                 hasFeedback
                             >
                                 <Password
                                     prefix={<LockOutlined className="site-form-item-icon" />}
-                                    placeholder="Password..."
+                                    placeholder="Contraseña..."
                                     size="large"
                                     autoFocus
                                 />
@@ -153,12 +153,12 @@ const ChangePassword = () => {
                                 rules={[
                                     {
                                         required: true,
-                                        message: 'Please confirm your password!',
+                                        message: '¡Por favor, confirme tu contraseña!',
                                     },
                                     {
                                         pattern:
                                             /^(?=.*\d)(?=.*[a-zA-Z])[0-9a-zA-Z!"#$%&()=?¿*-_.:,;+^\\-`.+,/]{8,}$/,
-                                        message: `Password must have 8 characters and 1 number`,
+                                        message: `La contraseña debe tener 8 caracteres y 1 número`,
                                     },
                                     ({ getFieldValue }) => ({
                                         validator(_, value) {
@@ -168,7 +168,7 @@ const ChangePassword = () => {
 
                                             return Promise.reject(
                                                 new Error(
-                                                    'The two passwords that you entered do not match!',
+                                                    '¡Las dos contraseñas que ingresó no coinciden!',
                                                 ),
                                             );
                                         },
@@ -177,7 +177,7 @@ const ChangePassword = () => {
                             >
                                 <Password
                                     prefix={<LockOutlined className="site-form-item-icon" />}
-                                    placeholder="Confirm Password..."
+                                    placeholder="Confirmar contraseña..."
                                     size="large"
                                 />
                             </Item>
@@ -189,14 +189,14 @@ const ChangePassword = () => {
                                     className="button-submit"
                                     size="large"
                                 >
-                                    Save
+                                    Guardar
                                 </Button>
                             </Item>
                         </div>
                     )}
 
                     <Item style={{ textAlign: 'center' }}>
-                        <span style={{ marginRight: '8px' }}>Do you already have an account?</span>
+                        <span style={{ marginRight: '8px' }}>¿Ya tienes una cuenta?</span>
                         <Link to="/auth/login">Login</Link>
                     </Item>
                 </Form>

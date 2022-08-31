@@ -45,16 +45,16 @@ const ContactForm = ({ currentContact, isModalVisible, onCreate, onUpdate, onCan
                 }
             })
             .catch((info) => {
-                console.log('Validate Failed:', info);
+                console.log('Validación Fallida:', info);
             });
     };
 
     return (
         <Modal
-            title={currentContact ? 'Edit Contact' : 'Add New Contact'}
+            title={currentContact ? 'Editar Contacto' : 'Agregar nuevo contacto'}
             visible={isModalVisible}
-            okText="Save"
-            cancelText="Cancel"
+            okText="Guardar"
+            cancelText="Cancelar"
             onOk={onOk}
             onCancel={onCancel}
             destroyOnClose={true}
@@ -71,11 +71,11 @@ const ContactForm = ({ currentContact, isModalVisible, onCreate, onUpdate, onCan
 
                         <Item
                             name="fullname"
-                            label="Fullname"
+                            label="Nombre Completo"
                             rules={[
                                 {
                                     required: true,
-                                    message: 'Please enter your name!',
+                                    message: 'Por favor ingresa tu nombre!',
                                 },
                             ]}
                         >
@@ -84,15 +84,15 @@ const ContactForm = ({ currentContact, isModalVisible, onCreate, onUpdate, onCan
 
                         <Item
                             name="celphone1"
-                            label="Cellphone"
+                            label="Número de Celular"
                             rules={[
                                 {
                                     required: true,
-                                    message: 'Please enter your cellphone!',
+                                    message: 'Por favor ingrese su número de celular!',
                                 },
                                 {
                                     pattern: /^[0-9]+$/,
-                                    message: `Please enter correct cellphone!`,
+                                    message: `Por favor ingresa tu número de celular correcto!`,
                                 },
                             ]}
                         >
@@ -105,11 +105,11 @@ const ContactForm = ({ currentContact, isModalVisible, onCreate, onUpdate, onCan
                             rules={[
                                 {
                                     required: true,
-                                    message: 'Please enter your email',
+                                    message: 'Por favor ingresa tu email',
                                 },
                                 {
                                     type: 'email',
-                                    message: 'The input is not valid email!',
+                                    message: 'La entrada no es un email válido!',
                                 },
                             ]}
                         >
@@ -118,11 +118,11 @@ const ContactForm = ({ currentContact, isModalVisible, onCreate, onUpdate, onCan
 
                         <Item
                             name="address"
-                            label="Address"
+                            label="Dirección"
                             rules={[
                                 {
                                     required: true,
-                                    message: 'Please enter your address!',
+                                    message: 'Por favor ingresa tu dirección!',
                                 },
                             ]}
                         >
@@ -131,11 +131,11 @@ const ContactForm = ({ currentContact, isModalVisible, onCreate, onUpdate, onCan
 
                         <Item
                             name="phone1"
-                            label="Phone"
+                            label="Teléfono"
                             rules={[
                                 {
                                     pattern: /^[0-9]+$/,
-                                    message: `Please enter correct phone!`,
+                                    message: `Por favor ingresa un número de teléfono correcto!`,
                                 },
                             ]}
                         >

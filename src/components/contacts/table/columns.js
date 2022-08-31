@@ -10,7 +10,7 @@ const columns = (isSmallDevice, handleEditClick, handleDeleteClick) => {
 
     return [
         {
-            title: 'Name',
+            title: 'Nombre',
             dataIndex: 'name',
             key: 'name',
             responsive: ['md', 'sm', 'xs'],
@@ -21,7 +21,7 @@ const columns = (isSmallDevice, handleEditClick, handleDeleteClick) => {
             // },
         },
         {
-            title: 'Cellphone',
+            title: 'Celular',
             dataIndex: 'celphone1',
             key: 'celphone1',
             responsive: ['md'],
@@ -33,7 +33,7 @@ const columns = (isSmallDevice, handleEditClick, handleDeleteClick) => {
             responsive: ['md'],
         },
         {
-            title: 'Action',
+            title: 'Acción',
             key: 'action',
             render: (record) => {
                 return (

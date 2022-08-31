@@ -48,19 +48,19 @@ const User = ({ userProfile }) => {
                 if (response.data === null) {
                     notification['error']({
                         message: 'Error',
-                        description: 'Error trying to updating user.',
+                        description: 'Error al intentar actualizar el usuario.',
                     });
                 } else {
                     notification['success']({
-                        message: 'Success Operation',
-                        description: 'User successfully updated.',
+                        message: 'Operación Exitosa',
+                        description: 'Usuario actualizado exitosamente.',
                     });
                 }
             })
             .catch((error) => {
                 notification['error']({
                     message: 'Error',
-                    description: 'Error trying to updating user.',
+                    description: 'Error tratando de actualizar usuario.',
                 });
                 console.log(error);
             });
@@ -73,7 +73,7 @@ const User = ({ userProfile }) => {
                 setIsModalVisible(true);
             })
             .catch((info) => {
-                console.log('Validate Failed:', info);
+                console.log('Validación Fallida:', info);
             });
     };
 
@@ -90,7 +90,7 @@ const User = ({ userProfile }) => {
             <div className="form animate__animated animate__fadeIn">
                 <ProfileTwoTone style={{ fontSize: '70px', color: 'blue', marginBottom: '10px' }} />
                 <Title level={3} className="title">
-                    User Profile
+                    Perfil del Usuario
                 </Title>
 
                 <Form form={form} name="form" onFinish={formSuccess} onFinishFailed={formFailed}>
@@ -99,13 +99,13 @@ const User = ({ userProfile }) => {
                         rules={[
                             {
                                 required: true,
-                                message: 'Please enter your fullname',
+                                message: 'Por favor ingresa tu nombre completo',
                             },
                         ]}
                     >
                         <Input
                             prefix={<UserOutlined className="site-form-item-icon" />}
-                            placeholder="Fullname"
+                            placeholder="Nombre Completo"
                             size="large"
                             autoComplete="off"
                         />
@@ -116,11 +116,11 @@ const User = ({ userProfile }) => {
                         rules={[
                             {
                                 required: true,
-                                message: 'Please enter your email',
+                                message: 'Por favor ingresa tu correo electrónico',
                             },
                             {
                                 type: 'email',
-                                message: 'The input is not valid email!',
+                                message: '¡La entrada no es un correo electrónico válido!',
                             },
                         ]}
                     >
@@ -145,7 +145,7 @@ const User = ({ userProfile }) => {
                             className="button-submit"
                             size="large"
                         >
-                            Update
+                            Actualizar
                         </Button>
                     </Item>
                 </Form>

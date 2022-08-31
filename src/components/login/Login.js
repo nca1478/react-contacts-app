@@ -35,7 +35,7 @@ const Login = () => {
             .then((response) => {
                 if (response.data === null) {
                     notification['error']({
-                        message: 'Login Error',
+                        message: 'Error en Login',
                         description: response.errors.msg,
                     });
                 } else {
@@ -50,8 +50,8 @@ const Login = () => {
             })
             .catch((error) => {
                 notification['error']({
-                    message: 'Login Error',
-                    description: 'Please verify the data entered and try again.',
+                    message: 'Error en Login',
+                    description: 'Verifica los datos ingresados y vuelve a intentarlo.',
                 });
                 console.log(error);
             });
@@ -68,8 +68,8 @@ const Login = () => {
             .then((response) => {
                 if (response.data === null) {
                     notification['error']({
-                        message: 'Login Error',
-                        description: 'An error has occurred starting the google session.',
+                        message: 'Error en Login',
+                        description: 'Se ha producido un error al iniciar la sesión de Google.',
                     });
                 } else {
                     const dataUser = {
@@ -83,8 +83,8 @@ const Login = () => {
             })
             .catch((error) => {
                 notification['error']({
-                    message: 'Login Error',
-                    description: 'An error has occurred starting the google session.',
+                    message: 'Error en Login',
+                    description: 'Se ha producido un error al iniciar la sesión de Google.',
                 });
                 console.log(error);
             });
@@ -97,8 +97,8 @@ const Login = () => {
             .then((response) => {
                 if (response.data === null) {
                     notification['error']({
-                        message: 'Login Error',
-                        description: 'An error has occurred starting the facebook session.',
+                        message: 'Error en Login',
+                        description: 'Ha ocurrido un error al iniciar la sesión de facebook.',
                     });
                 } else {
                     const dataUser = {
@@ -112,8 +112,8 @@ const Login = () => {
             })
             .catch((error) => {
                 notification['error']({
-                    message: 'Login Error',
-                    description: 'An error has occurred starting the facebook session.',
+                    message: 'Error en Login',
+                    description: 'Ha ocurrido un error al iniciar la sesión de facebook.',
                 });
                 console.log(error);
             });
@@ -126,7 +126,7 @@ const Login = () => {
                     style={{ fontSize: '70px', color: 'blue', marginBottom: '10px' }}
                 />
                 <Title level={3} className="title">
-                    React Contacts App
+                    React Contactos
                 </Title>
 
                 <Form name="form" onFinish={formSuccess} onFinishFailed={formFailed}>
@@ -135,13 +135,13 @@ const Login = () => {
                         rules={[
                             {
                                 required: true,
-                                message: 'Please enter your username',
+                                message: 'Por favor, ingresa tu nombre de usuario',
                             },
                         ]}
                     >
                         <Input
                             prefix={<UserOutlined className="site-form-item-icon" />}
-                            placeholder="Username"
+                            placeholder="Nombre de Usuario"
                             size="large"
                             autoComplete="off"
                         />
@@ -152,13 +152,13 @@ const Login = () => {
                         rules={[
                             {
                                 required: true,
-                                message: 'Please enter your password',
+                                message: 'Por favor, ingresa tu contraseña',
                             },
                         ]}
                     >
                         <Password
                             prefix={<LockOutlined className="site-form-item-icon" />}
-                            placeholder="Password"
+                            placeholder="Contraseña"
                             size="large"
                         />
                     </Item>
@@ -190,7 +190,7 @@ const Login = () => {
                                 disabled={renderProps.disabled}
                                 danger
                             >
-                                <GoogleOutlined /> Login with Google
+                                <GoogleOutlined /> Login con Google
                             </Button>
                         )}
                         buttonText="Login"
@@ -204,17 +204,17 @@ const Login = () => {
                         appId={process.env.REACT_APP_FACEBOOK_APP_ID}
                         callback={responseFacebook}
                         cssClass="button-submit facebook-button"
-                        textButton={<span>Login with Facebook</span>}
+                        textButton={<span>Login con Facebook</span>}
                         icon="fa-facebook"
                         disableMobileRedirect={true}
                     />
 
                     <Item style={{ textAlign: 'center', marginTop: '10px' }}>
-                        <span style={{ marginRight: '8px' }}>Do you need an account?</span>
-                        <Link to="/auth/register">Register</Link>
+                        <span style={{ marginRight: '8px' }}>¿Necesitas una cuenta?</span>
+                        <Link to="/auth/register">Registrar</Link>
                         <br />
-                        <span style={{ marginRight: '8px' }}>Forgot your password?</span>
-                        <Link to="/auth/recover-password">Recover it</Link>
+                        <span style={{ marginRight: '8px' }}>¿Olvidaste tu contraseña?</span>
+                        <Link to="/auth/recover-password">Recuperar</Link>
                     </Item>
                 </Form>
             </div>

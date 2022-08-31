@@ -52,8 +52,8 @@ const Contacts = () => {
             .catch((error) => {
                 console.log(error);
                 notification['error']({
-                    message: 'An error has occurred',
-                    description: 'Error trying to count contacts from the database.',
+                    message: 'Ha ocurrido un error',
+                    description: 'Error al intentar contar contactos de la base de datos.',
                 });
             });
     };
@@ -68,8 +68,8 @@ const Contacts = () => {
             .catch((error) => {
                 console.log(error);
                 notification['error']({
-                    message: 'An error has occurred',
-                    description: 'Error trying to get contacts from the database.',
+                    message: 'Se ha producido un error',
+                    description: 'Error al intentar obtener contactos de la base de datos.',
                 });
             })
             .finally(() => {
@@ -87,8 +87,8 @@ const Contacts = () => {
             .catch((error) => {
                 console.log(error);
                 notification['error']({
-                    message: 'An error has occurred',
-                    description: 'Error trying to get contacts from the database.',
+                    message: 'Se ha producido un error',
+                    description: 'Error al intentar obtener contactos de la base de datos.',
                 });
             })
             .finally(() => {
@@ -110,12 +110,12 @@ const Contacts = () => {
                 if (response.data === null) {
                     notification['error']({
                         message: 'Error',
-                        description: 'Error trying to creating contact into the database.',
+                        description: 'Error al intentar crear el contacto en la base de datos.',
                     });
                 } else {
                     notification['success']({
-                        message: 'Success Operation',
-                        description: 'Contact successfully created.',
+                        message: 'Operación Exitosa',
+                        description: 'Contacto creado con éxito.',
                     });
                     fetchContacts(page);
                 }
@@ -123,7 +123,7 @@ const Contacts = () => {
             .catch((error) => {
                 notification['error']({
                     message: 'Error',
-                    description: 'Error trying to creating contact into the database.',
+                    description: 'Error al intentar crear un contacto en la base de datos.',
                 });
                 console.log(error);
             })
@@ -147,12 +147,13 @@ const Contacts = () => {
                 if (response.data === null) {
                     notification['error']({
                         message: 'Error',
-                        description: 'Error trying to updating contact into the database.',
+                        description:
+                            'Error al intentar actualizar el contacto en la base de datos.',
                     });
                 } else {
                     notification['success']({
-                        message: 'Success Operation',
-                        description: 'Contact successfully updated.',
+                        message: 'Operación Exitosa',
+                        description: 'Contacto actualizado correctamente.',
                     });
                     fetchContacts(page);
                 }
@@ -160,7 +161,7 @@ const Contacts = () => {
             .catch((error) => {
                 notification['error']({
                     message: 'Error',
-                    description: 'Error trying to updating contact into the database.',
+                    description: 'Error al intentar actualizar el contacto en la base de datos.',
                 });
                 console.log(error);
             });
@@ -173,12 +174,12 @@ const Contacts = () => {
                 if (response.data === null) {
                     notification['error']({
                         message: 'Error',
-                        description: 'Error trying to deleting contact into the database.',
+                        description: 'Error al intentar eliminar el contacto en la base de datos.',
                     });
                 } else {
                     notification['success']({
-                        message: 'Success Operation',
-                        description: 'Contact successfully deleted.',
+                        message: 'Operación Exitosa',
+                        description: 'Contacto eliminado con éxito.',
                     });
                     fetchContacts(page);
                 }
@@ -186,7 +187,7 @@ const Contacts = () => {
             .catch((error) => {
                 notification['error']({
                     message: 'Error',
-                    description: 'Error trying to deleting contact into the database.',
+                    description: 'Error al intentar eliminar el contacto en la base de datos.',
                 });
                 console.log(error);
             });
@@ -194,14 +195,14 @@ const Contacts = () => {
 
     const showConfirm = (id) => {
         confirm({
-            title: 'Warning',
+            title: 'Advertencia',
             icon: <ExclamationCircleOutlined />,
-            content: 'Do you want to delete this contact?',
+            content: '¿Quieres eliminar este contacto?',
             onOk() {
                 onDelete(id);
             },
             onCancel() {
-                console.log('Cancel Delete!');
+                console.log('Borrado Cancelado!');
             },
             centered: true,
         });
@@ -235,17 +236,14 @@ const Contacts = () => {
 
     return (
         <div>
-            <Divider style={dividerFontSize}>
-                {auth.user.name.split(' ', 1)}
-                {"'s"} Contacts
-            </Divider>
+            <Divider style={dividerFontSize}>Contactos de {auth.user.name.split(' ', 1)}</Divider>
 
             <div className="box-filtering">
                 <Search
                     autoFocus
-                    placeholder="Input name text"
+                    placeholder="Ingrese nombre del contacto"
                     allowClear
-                    enterButton="Search"
+                    enterButton="Buscar"
                     // size="large"
                     onSearch={onSearch}
                     className="search"

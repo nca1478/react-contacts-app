@@ -14,11 +14,11 @@ import { AuthContext } from '../../context/auth';
 const { Header, Content, Footer } = Layout;
 
 const handleLogoutFailure = (error) => {
-    console.log('Error: Google Logout!', error);
+    console.log('Error: Al cerrar sesión de Google!', error);
 };
 
 const handleLogoutSuccess = () => {
-    console.log('Bye, see you later!');
+    console.log('Hasta luego, te veremos proximamente!');
 };
 
 const Dashboard = () => {
@@ -59,21 +59,21 @@ const Dashboard = () => {
                             {loaded && auth.user.img ? (
                                 <Avatar size="large" src={auth.user.img} />
                             ) : (
-                                <Avatar size={40}>User</Avatar>
+                                <Avatar size={40}>Usuario</Avatar>
                             )}
                         </Menu.Item>
                         <Menu.Item onClick={() => setMenuItem('1')} key="1">
-                            Contacts
+                            Contactos
                         </Menu.Item>
 
                         {loaded && !(auth.user.google || auth.user.facebook) ? (
                             <Menu.Item onClick={() => setMenuItem('2')} key="2">
-                                Profile
+                                Perfil
                             </Menu.Item>
                         ) : null}
 
                         <Menu.Item onClick={() => handleSignOut()} key="3">
-                            Logout
+                            Salir
                         </Menu.Item>
                     </Menu>
                 </Header>
@@ -84,7 +84,7 @@ const Dashboard = () => {
                 </Content>
                 <Footer className="footer">
                     Copyright &copy; 2022 <br />
-                    Developed by:{' '}
+                    Desarrollado por:{' '}
                     <a href="https://nelsoncadenas.netlify.app/" target="_blank" rel="noreferrer">
                         Nelson Cadenas
                     </a>

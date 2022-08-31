@@ -19,16 +19,16 @@ const PasswordForm = ({ isModalVisible, onUpdate, onCancel }) => {
                 onUpdate(values);
             })
             .catch((info) => {
-                console.log('Validate Failed:', info);
+                console.log('Valicación Fallida:', info);
             });
     };
 
     return (
         <Modal
-            title="Enter your Password"
+            title="Ingresa tu Contraseña"
             visible={isModalVisible}
-            okText="Send"
-            cancelText="Cancel"
+            okText="Enviar"
+            cancelText="Cancelar"
             onOk={onOk}
             onCancel={onCancel}
             destroyOnClose={true}
@@ -44,13 +44,13 @@ const PasswordForm = ({ isModalVisible, onUpdate, onCancel }) => {
                             rules={[
                                 {
                                     required: true,
-                                    message: 'Please enter your password',
+                                    message: 'Por favor ingresa tu contraseña',
                                 },
                             ]}
                         >
                             <Password
                                 prefix={<LockOutlined className="site-form-item-icon" />}
-                                placeholder="Password"
+                                placeholder="Contraseña"
                                 size="large"
                             />
                         </Item>

@@ -1,69 +1,69 @@
-# React Contacts App
+# React Contactos App
 
-`React Contacts App` is a web application that allows users to save contact information.
+`React Contactos` es una aplicación web que permite a los usuarios guardar información de contactos.
 
-## Features
+## Características
 
-- User contacts database. 
-- CRUD features.
-- Local, Google and Facebook login auth.
-- Register account form.
-- Recover password form.
-- Email Notification.
-- Database hosted by MongoDB Atlas.
-- Backend stack: NodeJS, Express and Mongoose.
-- Public and Private Routes.
-- State Manage Component through useState hook.
-- Manage state globally through useContext hook.
-- For handling forms, i use useForm custom hook.
+-   Base de Datos de contactos.
+-   Tareas CRUD.
+-   Autenticación local, google y facebook.
+-   Formulario de registro de usuario.
+-   Formulario de recuperación de contraseña del usuario.
+-   Notificaciones por email.
+-   Base de Datos alojada en MongoDB Atlas.
+-   Stack Backend: NodeJS, Express and Mongoose.
+-   Rutas públicas y privadas.
+-   Manejo de estados con el hook useState.
+-   Manejo del estado global de la aplicación el hook useContext.
+-   Manejo de formularios con el hook personalizado useForm.
 
-## General Information
+## Información General
 
-- The purpose of this project is to practice the web technologies shown below.
+-   El propósito de este proyecto es practicar las tecnologías web que se muestran a continuación.
 
 ## Tech Stack
 
-- HTML5.
-- CSS3.
-- Antdesign React UI Framework.
-- Responsive Design.
-- ReactJS.
-- MongoDB Atlas.
+-   HTML5.
+-   CSS3.
+-   Antdesign React UI Framework.
+-   Responsive Design.
+-   ReactJS.
+-   MongoDB Atlas.
 
-## React Technologies
+## Tecnologías React
 
-- [Antdesing React UI Framework](https://ant.design/)
-- [Create React App](https://create-react-app.dev/)
-- [React Router Dom](https://v5.reactrouter.com/web/guides/quick-start)
+-   [Antdesing React UI Framework](https://ant.design/)
+-   [Create React App](https://create-react-app.dev/)
+-   [React Router Dom](https://v5.reactrouter.com/web/guides/quick-start)
 
-## Development tools and other Technologies
+## Herramientas de Desarrollo y Otras
 
-- [Animate.css](https://animate.style/)
-- [MongoDB Atlas](https://www.mongodb.com/atlas/database)
-- [Nodejs](https://nodejs.org/en/)
-- [Vscode](https://code.visualstudio.com/)
+-   [Animate.css](https://animate.style/)
+-   [MongoDB Atlas](https://www.mongodb.com/atlas/database)
+-   [Nodejs](https://nodejs.org/en/)
+-   [Vscode](https://code.visualstudio.com/)
 
 ## Demo
 
-- [Calendar App](https://contacts-app-njca.netlify.app/)
+-   [Contactos App](https://contacts-app-njca.netlify.app/)
 
 ## Backend Repo
 
-- [Calendar Api](https://github.com/nca1478/react-contacts-api)
+-   [Contactos Api](https://github.com/nca1478/react-contacts-api)
 
-## Requirements
+## Requerimientos
 
-- Nodejs v14 or better.
-- React 17.0.2 or better.
+-   Nodejs v14 o superior.
+-   React 17.0.2 o superior.
 
-## Installation
+## Instalación
 
 > npm install
 
-## Run the app
+## Ejecutar la aplicación
 
 > npm start
 
-## Enter file
+## Archivo de Entrada
 
 > /src/index.js
