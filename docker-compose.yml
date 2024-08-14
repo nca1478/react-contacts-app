@@ -1,0 +1,15 @@
+version: '3.8'
+services:
+    web:
+        container_name: contacts-app
+        build: .
+        ports:
+            - '3000:3000'
+        environment:
+            - REACT_APP_API_URL=${REACT_APP_API_URL}
+            - REACT_APP_GOOGLE_CLIENT_ID=${REACT_APP_GOOGLE_CLIENT_ID}
+            - REACT_APP_FACEBOOK_APP_ID=${REACT_APP_FACEBOOK_APP_ID}
+            - REACT_APP_JWT_SECRET=${REACT_APP_JWT_SECRET}
+        volumes:
+            - .:/app
+            - /app/node_modules
