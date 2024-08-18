@@ -54,16 +54,22 @@
 ## Requerimientos
 
 -   Nodejs v14 o superior.
--   React 17.0.2 o superior.
+-   Docker Desktop.
 
 ## Instalación
 
-> npm install
+## Variables de entorno
 
-## Ejecutar la aplicación
+-   Renombrar .env.example a .env.
+-   Agregar las credenciales al .env.
+-   Actualizar la variable `REACT_APP_API_URL` con la url de la api.
 
-> npm start
+## Instalar aplicación
+
+-   Ejecutar el comando: `docker compose up --build -d`
+-   Para eliminar: `docker compose down --volumes`
+-   Url app: `http://localhost:3000`
 
 ## Archivo de Entrada
 
-> /src/index.js
+> src/index.js
