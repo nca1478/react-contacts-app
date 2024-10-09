@@ -1,15 +1,15 @@
-version: '3.8'
+version: '3.9'
+
 services:
-    web:
+    app:
         container_name: contacts-app
-        build: .
+        build:
+            context: .
+            dockerfile: Dockerfile
+        volumes:
+            - ./src:/app/src
         ports:
             - '3000:3000'
         environment:
-            - REACT_APP_API_URL=${REACT_APP_API_URL}
-            - REACT_APP_GOOGLE_CLIENT_ID=${REACT_APP_GOOGLE_CLIENT_ID}
-            - REACT_APP_FACEBOOK_APP_ID=${REACT_APP_FACEBOOK_APP_ID}
-            - REACT_APP_JWT_SECRET=${REACT_APP_JWT_SECRET}
-        volumes:
-            - .:/app
-            - /app/node_modules
+            - CHOKIDAR_USEPOLLING=true
+            - SKIP_PREFLIGHT_CHECK=true

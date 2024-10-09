@@ -1,13 +1,9 @@
-FROM node:14.0.0-alpine3.11 AS build
+FROM node:14-alpine AS development
+ENV NODE_ENV development
 WORKDIR /app
 COPY package*.json ./
-RUN npm install --frozen-lockfile
-COPY . .
-RUN npm run build
+RUN npm install
 
-FROM nginx:alpine
-COPY --from=build /app/build /usr/share/nginx/html
-RUN rm /etc/nginx/conf.d/default.conf
-COPY nginx.conf /etc/nginx/conf.d
+COPY . .
 EXPOSE 3000
-CMD ["nginx", "-g", "daemon off;"]
+CMD ["npm", "start"]
